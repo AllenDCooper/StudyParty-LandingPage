@@ -18,8 +18,8 @@ function Index() {
       <ProductValues />
       {/* <ProductCategories />
       <ProductHowItWorks />
-      <ProductCTA />
-      <ProductSmokingHero /> */}
+      <ProductCTA /> */}
+      <ProductSmokingHero />
       <AppFooter />
     </React.Fragment>
   );

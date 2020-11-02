@@ -42,20 +42,20 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div />
+          <div className={classes.left} />
           <Link
             className="permanent-marker pink"
             variant="h6"
             underline="none"
             color="inherit"
-            // className={classes.title}
+            className={classes.title}
             href="#"
             style={{fontFamily:"Permanent Marker"}}
           >
             {'StudyParty'}
           </Link>
           <div className={classes.right}>
-            <Link
+            {/* <Link
               color="inherit"
               variant="h6"
               underline="none"
@@ -63,7 +63,7 @@ function AppAppBar(props) {
               href="/#"
             >
               {'About'}
-            </Link>
+            </Link> */}
             {/* <Link
               variant="h6"
               underline="none"

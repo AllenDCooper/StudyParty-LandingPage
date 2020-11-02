@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import {Input, InputLabel } from '@material-ui/core'
+import { Input, InputLabel } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
 
@@ -55,10 +55,10 @@ function ProductHero(props) {
         {show === 1 ?
           <>
             <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-            <h2 className="main-title" style={{ marginBottom: '20px' }}>
-              <span className="permanent-marker pink">StudyParty</span>
-            </h2>
-            <span style={{ width: "100px", borderBottom: "4px solid white" }}></span>
+            <Typography color="inherit" align="center" variant="h2" marked="center">
+              Better scores, more fun
+      </Typography>
+            {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
             <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
               Rhoncus est pellentesque elit ullamcorper dignissim cras
       </Typography>
@@ -77,7 +77,7 @@ function ProductHero(props) {
           <form>
             <div className="row">
               <div className="input-field col s6">
-                <InputLabel style={{marginBottom: '30px', color: 'white' }}>Please enter your email address:</InputLabel>
+                <InputLabel style={{ marginBottom: '30px', color: 'white' }}>Please enter your email address:</InputLabel>
                 <Input type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
               </div>
             </div>
