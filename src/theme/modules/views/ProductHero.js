@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
+import {Input, InputLabel } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
 
@@ -33,31 +34,62 @@ const styles = (theme) => ({
 function ProductHero(props) {
   const { classes } = props;
 
+  const [show, setShow] = useState(1);
+  const handleBack = () => setShow(1);
+  const handleNext = () => setShow(2);
+
+  const [username, setUsername] = useState("")
+  const handleChange = (event) => {
+    setUsername(event.currentTarget.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("submitted");
+    setShow(1);
+  }
+
   return (
     <>
       <ProductHeroLayout backgroundClassName={classes.background}>
-        {/* Increase the network loading priority of the background image. */}
-        <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-        <h2 className="main-title" style={{marginBottom: '20px'}}>
-          <span className="permanent-marker pink">StudyParty</span>
-        </h2>
-        <span style={{width: "100px", borderBottom: "4px solid white"}}></span>
-        <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-          Rhoncus est pellentesque elit ullamcorper dignissim cras
+        {show === 1 ?
+          <>
+            <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+            <h2 className="main-title" style={{ marginBottom: '20px' }}>
+              <span className="permanent-marker pink">StudyParty</span>
+            </h2>
+            <span style={{ width: "100px", borderBottom: "4px solid white" }}></span>
+            <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+              Rhoncus est pellentesque elit ullamcorper dignissim cras
       </Typography>
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component="a"
-          href="#"
-        >
-          Get Started
-      </Button>
-        {/* <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
-      </Typography> */}
+            <Button
+              color="secondary"
+              variant="contained"
+              size="large"
+              className={classes.button}
+              component="a"
+              onClick={handleNext}
+            >
+              Get Started
+            </Button>
+          </>
+          :
+          <form>
+            <div className="row">
+              <div className="input-field col s6">
+                <InputLabel style={{marginBottom: '30px', color: 'white' }}>Please enter your email address:</InputLabel>
+                <Input type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
+              </div>
+            </div>
+            <div className="row">
+              <Button onClick={handleBack} >
+                Back
+            </Button>
+              <Button onClick={handleSubmit}>
+                Submit
+            </Button>
+            </div>
+          </form>}
       </ProductHeroLayout>
     </>
   );
