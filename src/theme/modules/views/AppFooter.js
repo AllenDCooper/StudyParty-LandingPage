@@ -89,10 +89,10 @@ export default function AppFooter() {
             >
               <Grid item className={classes.icons}>
                 <a href="https://material-ui.com/" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterFacebook.png" alt="Facebook" />
+                  <img src="/images/appFooterFacebook.png" alt="Facebook" />
                 </a>
                 <a href="https://twitter.com/MaterialUI" className={classes.icon}>
-                  <img src="/static/themes/onepirate/appFooterTwitter.png" alt="Twitter" />
+                  <img src="/images/appFooterTwitter.png" alt="Twitter" />
                 </a>
               </Grid>
               <Grid item>
@@ -101,7 +101,7 @@ export default function AppFooter() {
             </Grid>
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
-            <Typography variant="h6" marked="left" gutterBottom>
+            <Typography variant="h6" marked="center" gutterBottom>
               Legal
             </Typography>
             <ul className={classes.list}>
@@ -114,7 +114,7 @@ export default function AppFooter() {
             </ul>
           </Grid>
           <Grid item xs={6} sm={8} md={4}>
-            <Typography variant="h6" marked="left" gutterBottom>
+            <Typography variant="h6" marked="center" gutterBottom>
               Language
             </Typography>
             <TextField

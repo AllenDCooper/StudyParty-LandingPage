@@ -42,15 +42,17 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+          <div />
           <Link
+            className="permanent-marker pink"
             variant="h6"
             underline="none"
             color="inherit"
-            className={classes.title}
-            href="/premium-themes/onepirate/"
+            // className={classes.title}
+            href="#"
+            style={{fontFamily:"Permanent Marker"}}
           >
-            {'onepirate'}
+            {'StudyParty'}
           </Link>
           <div className={classes.right}>
             <Link
@@ -58,18 +60,18 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={classes.rightLink}
-              href="/premium-themes/onepirate/sign-in/"
+              href="/#"
             >
-              {'Sign In'}
+              {'About'}
             </Link>
-            <Link
+            {/* <Link
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
               href="/premium-themes/onepirate/sign-up/"
             >
               {'Sign Up'}
-            </Link>
+            </Link> */}
           </div>
         </Toolbar>
       </AppBar>

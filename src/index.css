@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.permanent-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.pink {
+  color: hotpink;
+}
+
+.main-title {
+  font-size: 4.5rem;
+  /* letter-spacing: 5px; */
+}
+
+@media only screen and (max-width: 600px) {
+  .main-title {
+    font-size: 3rem;
+    /* letter-spacing: 5px; */
+  }
 }

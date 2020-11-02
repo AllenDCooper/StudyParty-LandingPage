@@ -4,13 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
+import Video from '../components/Video';
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
 
 const styles = (theme) => ({
   background: {
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(//player.vimeo.com/video/422929122?background=1&muted=1&autoplay=1&loop=1&badge=0&byline=0&title=0&portrait=0)`,
     backgroundColor: '#7fc7d9', // Average color of the background image.
     backgroundPosition: 'center',
   },
@@ -33,29 +34,32 @@ function ProductHero(props) {
   const { classes } = props;
 
   return (
-    <ProductHeroLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+    <>
+      <ProductHeroLayout backgroundClassName={classes.background}>
+        {/* Increase the network loading priority of the background image. */}
+        <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+        <h2 className="main-title" style={{marginBottom: '20px'}}>
+          <span className="permanent-marker pink">StudyParty</span>
+        </h2>
+        <span style={{width: "100px", borderBottom: "4px solid white"}}></span>
+        <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
+          Rhoncus est pellentesque elit ullamcorper dignissim cras
       </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
-      >
-        Register
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component="a"
+          href="#"
+        >
+          Get Started
       </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
+        {/* <Typography variant="body2" color="inherit" className={classes.more}>
         Discover the experience
-      </Typography>
-    </ProductHeroLayout>
+      </Typography> */}
+      </ProductHeroLayout>
+    </>
   );
 }
 

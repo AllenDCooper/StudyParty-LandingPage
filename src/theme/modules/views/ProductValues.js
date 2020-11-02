@@ -44,7 +44,7 @@ function ProductValues(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
         />
@@ -53,15 +53,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues1.svg"
+                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/41941b32-simple-benefit-01_1000000000000000000028.png"
                 alt="suitcase"
               />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+                Headline 1
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
               </Typography>
             </div>
           </Grid>
@@ -69,15 +68,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues2.svg"
+                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/1fb2b319-simple-benefit-02_1000000000000000000028.png"
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+                Headline 2
               </Typography>
               <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
               </Typography>
             </div>
           </Grid>
@@ -85,15 +83,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="/static/themes/onepirate/productValues3.svg"
+                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/5b424626-simple-benefit-03_1000000000000000000028.png"
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+                Headline 3
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '}
               </Typography>
             </div>
           </Grid>

@@ -71,7 +71,7 @@ function ProductHowItWorks(props) {
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
+                  src="/images/productHowItWorks1.svg"
                   alt="suitcase"
                   className={classes.image}
                 />
