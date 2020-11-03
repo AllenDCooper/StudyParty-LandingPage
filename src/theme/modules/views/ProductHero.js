@@ -6,6 +6,7 @@ import Typography from '../components/Typography';
 import { Input, InputLabel } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
+import axios from 'axios';
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
@@ -43,8 +44,25 @@ function ProductHero(props) {
     setUsername(event.currentTarget.value)
   }
 
+  const sendToGoogleForms = (email) => {
+    const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
+    axios.get(url, {
+      params: {
+        email: email
+      }
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log(username)
+    sendToGoogleForms(username)
     console.log("submitted");
     setShow(1);
   }
