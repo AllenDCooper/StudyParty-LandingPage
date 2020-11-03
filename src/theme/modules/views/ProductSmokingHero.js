@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 import Typography from '../components/Typography';
 
 const styles = (theme) => ({
@@ -33,15 +34,19 @@ const styles = (theme) => ({
 function ProductSmokingHero(props) {
   const { classes } = props;
 
+  const handleClick = () => {
+    props.setShow(2);
+  }
   return (
     <Container className={classes.root} component="section">
-      <Button className={classes.button}>
+      <Link href={`${process.env.PUBLIC_URL}/#top`}><Button className={classes.button} onClick={handleClick} >
         <Typography variant="h4" component="span">
-        Get started
+          Get started
         </Typography>
       </Button>
+      </Link>
       <Typography variant="subtitle1" className={classes.link}>
-      Find a study partner or group today and start improving your score.
+        Find a study partner or group today and start improving your score.
       </Typography>
     </Container>
   );

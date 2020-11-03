@@ -11,7 +11,7 @@ function Copyright() {
     <React.Fragment>
       {'© '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        StudyParty
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -78,42 +78,42 @@ export default function AppFooter() {
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={3}>
-            <Grid
+        <Grid container spacing={5} justify='center'>
+          <Grid item xs={12} sm={8} md={4}>
+            <Typography variant="h6" marked="center" gutterBottom>
+              Social
+            </Typography>
+            {/* <Grid
               container
               direction="column"
               justify="flex-end"
               className={classes.iconsWrapper}
               spacing={2}
-            >
-              <Grid item className={classes.icons}>
+            > */}
+              <Grid item className={classes.icons} justify='center'>
                 <a href="https://material-ui.com/" className={classes.icon}>
-                  <img src="/images/appFooterFacebook.png" alt="Facebook" />
+                  <img src={`${process.env.PUBLIC_URL}/images/appFooterFacebook.png`} alt="Facebook" />
                 </a>
                 <a href="https://twitter.com/MaterialUI" className={classes.icon}>
-                  <img src="/images/appFooterTwitter.png" alt="Twitter" />
+                  <img src={`${process.env.PUBLIC_URL}/images/appFooterTwitter.png`} alt="Twitter" />
                 </a>
               </Grid>
-              <Grid item>
-                <Copyright />
-              </Grid>
-            </Grid>
+            {/* </Grid> */}
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
+          <Grid item xs={12} sm={8} md={4}>
             <Typography variant="h6" marked="center" gutterBottom>
               Legal
             </Typography>
             <ul className={classes.list}>
-              <li className={classes.listItem}>
+              <li className={classes.listItem} style={{ display: 'inline-block', marginRight: '10px' }}>
                 <Link href="/premium-themes/onepirate/terms/">Terms</Link>
               </li>
-              <li className={classes.listItem}>
+              <li className={classes.listItem} style={{ display: 'inline-block' }}>
                 <Link href="/premium-themes/onepirate/privacy/">Privacy</Link>
               </li>
             </ul>
           </Grid>
-          <Grid item xs={6} sm={8} md={4}>
+          <Grid item xs={12} sm={8} md={4}>
             <Typography variant="h6" marked="center" gutterBottom>
               Language
             </Typography>
@@ -131,26 +131,8 @@ export default function AppFooter() {
               ))}
             </TextField>
           </Grid>
-          <Grid item>
-            <Typography variant="caption">
-              {'Icons made by '}
-              <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
-                Freepik
-              </Link>
-              {' from '}
-              <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
-                www.flaticon.com
-              </Link>
-              {' is licensed by '}
-              <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CC 3.0 BY
-              </Link>
-            </Typography>
+          <Grid item xs={6} sm={8} md={4}>
+            <Copyright />
           </Grid>
         </Grid>
       </Container>

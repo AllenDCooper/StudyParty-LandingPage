@@ -16,7 +16,7 @@ const Video = () => {
 
     return (
         <video
-            src={"/assets/background_video.mp4"}
+            src={`${process.env.PUBLIC_URL}/assets/background_video.mp4`}
             type={"video/mp4"}
             autoPlay={true}
             loop={true}
