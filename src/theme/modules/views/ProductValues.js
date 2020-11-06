@@ -24,7 +24,7 @@ const styles = (theme) => ({
     padding: theme.spacing(0, 5),
   },
   image: {
-    height: 55,
+    width: '100%',
   },
   title: {
     marginTop: theme.spacing(5),

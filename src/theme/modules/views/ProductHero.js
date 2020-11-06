@@ -10,7 +10,7 @@ import axios from 'axios';
 import { PlayCircleFilledWhite } from '@material-ui/icons';
 
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+  '';
 
 const styles = (theme) => ({
   background: {
@@ -76,16 +76,17 @@ function ProductHero(props) {
   return (
     <>
       <ProductHeroLayout id={'top'} backgroundClassName={classes.background}>
+        {/* <div style={{backgroundColor: 'white', opacity: '0.25'}}> */}
         {props.show === 1 ?
           <>
             <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-            <Typography color="inherit" align="center" variant="h2" marked="center">
-              Better scores, more fun
-      </Typography>
+            <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700'}}>
+              Better Scores, <br></br>More Fun
+            </Typography>
             {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
-            <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-              Sign up today to find your StudyParty
-      </Typography>
+            <Typography color="inherit" align="center" variant="h5" className={classes.h5} style={{ fontFamily: 'PT Serif, serif', fontWeight: '400', fontSize: '16px', marginTop: '40px', maxWidth: '500px' }}>
+              Studying for the LSAT? Study Party is a new way to find a virtual study partner or group. Improve your score while meeting other future law students. Sign up below to get started.
+            </Typography>
             <Button
               color="secondary"
               variant="contained"
@@ -104,8 +105,8 @@ function ProductHero(props) {
                 <InputLabel style={{ marginBottom: '30px', width: '100%' }} className={classes.formColor} >Please enter your email address:</InputLabel>
 
               </Grid>
-              <Grid item xs={12}>
-                <Input style={{width: '80%', color: 'white'}} type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
+              <Grid item xs={10} style={{ margin: '0 auto' }}>
+                <Input style={{ width: '80%', color: 'white' }} type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
               </Grid>
               <Grid item xs={12} >
                 <Button onClick={handleBack} className={classes.formColor} >
@@ -133,6 +134,7 @@ function ProductHero(props) {
             </Button>
             </div> */}
           </form>}
+        {/* </div> */}
       </ProductHeroLayout>
     </>
   );

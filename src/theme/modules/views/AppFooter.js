@@ -79,26 +79,18 @@ export default function AppFooter() {
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={5} justify='center'>
-          <Grid item xs={12} sm={8} md={4}>
+          {/* <Grid item xs={12} sm={8} md={4}>
             <Typography variant="h6" marked="center" gutterBottom>
               Social
             </Typography>
-            {/* <Grid
-              container
-              direction="column"
-              justify="flex-end"
-              className={classes.iconsWrapper}
-              spacing={2}
-            > */}
-              <Grid item className={classes.icons} justify='center'>
-                <a href="https://material-ui.com/" className={classes.icon}>
-                  <img src={`${process.env.PUBLIC_URL}/images/appFooterFacebook.png`} alt="Facebook" />
-                </a>
-                <a href="https://twitter.com/MaterialUI" className={classes.icon}>
-                  <img src={`${process.env.PUBLIC_URL}/images/appFooterTwitter.png`} alt="Twitter" />
-                </a>
-              </Grid>
-            {/* </Grid> */}
+            <Grid item className={classes.icons} justify='center'>
+              <a href="https://material-ui.com/" className={classes.icon}>
+                <img src={`${process.env.PUBLIC_URL}/images/appFooterFacebook.png`} alt="Facebook" />
+              </a>
+              <a href="https://twitter.com/MaterialUI" className={classes.icon}>
+                <img src={`${process.env.PUBLIC_URL}/images/appFooterTwitter.png`} alt="Twitter" />
+              </a>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={8} md={4}>
             <Typography variant="h6" marked="center" gutterBottom>
@@ -130,7 +122,7 @@ export default function AppFooter() {
                 </option>
               ))}
             </TextField>
-          </Grid>
+          </Grid> */}
           <Grid item xs={6} sm={8} md={4}>
             <Copyright />
           </Grid>
