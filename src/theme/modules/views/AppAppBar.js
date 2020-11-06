@@ -42,7 +42,7 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left}/>
+          <div />
           <Link
             className="permanent-marker pink"
             variant="h6"
