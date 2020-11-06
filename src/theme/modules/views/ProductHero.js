@@ -70,7 +70,7 @@ function ProductHero(props) {
     sendToGoogleForms(username)
     console.log("submitted");
     setUsername("")
-    props.setShow(1);
+    props.setShow(3);
   }
 
   return (
@@ -80,7 +80,7 @@ function ProductHero(props) {
         {props.show === 1 ?
           <>
             <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-            <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700'}}>
+            <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700' }}>
               Better Scores, <br></br>More Fun
             </Typography>
             {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
@@ -99,41 +99,38 @@ function ProductHero(props) {
             </Button>
           </>
           :
-          <form>
+          props.show === 2 ?
+
+            <form>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <InputLabel style={{ marginBottom: '30px', width: '100%' }} className={classes.formColor} >Please enter your email address:</InputLabel>
+
+                </Grid>
+                <Grid item xs={10} style={{ margin: '0 auto' }}>
+                  <Input style={{ width: '80%', color: 'white' }} type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
+                </Grid>
+                <Grid item xs={12} >
+                  <Button onClick={handleBack} className={classes.formColor} >
+                    Back
+              </Button>
+                  <Button onClick={handleSubmit} className={classes.formColor} >
+                    Submit
+              </Button>
+                </Grid>
+
+              </Grid>
+            </form>
+            :
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                <InputLabel style={{ marginBottom: '30px', width: '100%' }} className={classes.formColor} >Please enter your email address:</InputLabel>
-
-              </Grid>
-              <Grid item xs={10} style={{ margin: '0 auto' }}>
-                <Input style={{ width: '80%', color: 'white' }} type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
-              </Grid>
-              <Grid item xs={12} >
+                <p>Thank you for submitting your form. We will be in touch soon!</p>
                 <Button onClick={handleBack} className={classes.formColor} >
                   Back
-            </Button>
-                <Button onClick={handleSubmit} className={classes.formColor} >
-                  Submit
-            </Button>
+                </Button>
               </Grid>
-
             </Grid>
-
-            {/* <div className="row">
-              <div className="input-field col s6 ">
-                <InputLabel style={{ marginBottom: '30px', color: 'white', width: '100%' }}>Please enter your email address:</InputLabel>
-                <Input type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
-              </div>
-            </div>
-            <div className="row">
-              <Button onClick={handleBack} >
-                Back
-            </Button>
-              <Button onClick={handleSubmit}>
-                Submit
-            </Button>
-            </div> */}
-          </form>}
+        }
         {/* </div> */}
       </ProductHeroLayout>
     </>
