@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import { Input, InputLabel, Grid, FormControl } from '@material-ui/core'
+import { Input, InputLabel, Grid, FormControl, FormHelperText } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
 import axios from 'axios';
@@ -31,7 +31,7 @@ const styles = (theme) => ({
     marginTop: theme.spacing(2),
   },
   formColor: {
-    color: 'white'
+    color: 'black'
   }
 });
 
@@ -39,13 +39,22 @@ function ProductHero(props) {
   console.log(props)
   const { classes } = props;
 
-  // const [show, setShow] = useState(1);
-  const handleBack = () => props.setShow(1);
   const handleNext = () => props.setShow(2);
 
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("");
+
+  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (event) => {
-    setUsername(event.currentTarget.value)
+    setEmail(event.currentTarget.value)
+  }
+
+  const handleBack = () => {
+    props.setShow(1);
+    setEmail("");
+    setError(false);
+    setErrorMessage("");
   }
 
   const sendToGoogleForms = (email) => {
@@ -63,18 +72,34 @@ function ProductHero(props) {
       })
   }
 
+  const ValidateEmail = (emailTest) => {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailTest)) {
+      return (true)
+    }
+    return (false)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(username)
-    sendToGoogleForms(username)
+    if (ValidateEmail(email)) {
+      completeSubmit(email);
+    } else {
+      setError(true);
+      setErrorMessage("Please enter a valid email address")
+    }
+  }
+
+  const completeSubmit = (email) => {
+    console.log(email)
+    sendToGoogleForms(email)
     console.log("submitted");
-    setUsername("")
+    setEmail("")
     props.setShow(3);
   }
 
   return (
     <>
-      <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{background: 'none'}}>
+      <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{ background: 'none' }}>
         {/* <div style={{backgroundColor: 'white', opacity: '0.25'}}> */}
         {props.show === 1 ?
           <>
@@ -107,7 +132,18 @@ function ProductHero(props) {
 
                 </Grid>
                 <Grid item xs={10} style={{ margin: '0 auto' }}>
-                  <Input style={{ width: '80%', color: 'white' }} type="text" id="username" name="username" value={username} onChange={handleChange} />
+                  <Input
+                    style={{ width: '80%', color: 'black' }}
+                    type="text"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    error={error}
+                  />
+                  {error ? 
+                  <FormHelperText id="helper-text" style={{textAlign: 'center', marginTop: '20px', color: 'red'}} >{errorMessage}</FormHelperText> 
+                  : null}
                 </Grid>
                 <Grid item xs={12} >
                   <Button onClick={handleBack} className={classes.formColor} >
