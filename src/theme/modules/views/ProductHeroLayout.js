@@ -7,7 +7,7 @@ import Video from '../components/Video';
 
 const styles = (theme) => ({
   root: {
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -30,8 +30,8 @@ const styles = (theme) => ({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.5,
+    backgroundColor: theme.palette.common.white,
+    opacity: 0.4,
     zIndex: -1,
   },
   background: {

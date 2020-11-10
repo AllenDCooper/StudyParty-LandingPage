@@ -13,6 +13,7 @@ const styles = (theme) => ({
   placeholder: toolbarStyles(theme).root,
   toolbar: {
     justifyContent: 'space-between',
+    background: 'none'
   },
   left: {
     flex: 1,
@@ -33,6 +34,16 @@ const styles = (theme) => ({
   linkSecondary: {
     color: theme.palette.secondary.main,
   },
+  backdrop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: theme.palette.common.white,
+    opacity: 0.4,
+    zIndex: -3,
+  },
 });
 
 function AppAppBar(props) {
@@ -40,17 +51,16 @@ function AppAppBar(props) {
 
   return (
     <div>
-      <AppBar position="fixed">
+      <AppBar position="relative">
+        <div className={classes.backdrop} />
         <Toolbar className={classes.toolbar}>
-          <div />
           <Link
             className="permanent-marker pink"
-            variant="h6"
             underline="none"
             color="inherit"
             className={classes.title}
-            href="#"
-            style={{fontFamily:"Permanent Marker", color: "hotpink"}}
+            href={process.env.PUBLIC_URL}
+            style={{fontFamily:"Permanent Marker", color: "hotpink", fontSize: "36px"}}
           >
             {'StudyParty!'}
           </Link>
@@ -75,7 +85,7 @@ function AppAppBar(props) {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.placeholder} />
+      <div className={classes.placeholder, classes.backdrop} />
     </div>
   );
 }

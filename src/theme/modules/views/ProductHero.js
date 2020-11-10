@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import { Input, InputLabel, Grid } from '@material-ui/core'
+import { Input, InputLabel, Grid, FormControl } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
 import axios from 'axios';
@@ -14,8 +14,7 @@ const backgroundImage =
 
 const styles = (theme) => ({
   background: {
-    backgroundImage: `url(//player.vimeo.com/video/422929122?background=1&muted=1&autoplay=1&loop=1&badge=0&byline=0&title=0&portrait=0)`,
-    backgroundColor: '#7fc7d9', // Average color of the background image.
+    // backgroundColor: '#7fc7d9', // Average color of the background image.
     backgroundPosition: 'center',
   },
   button: {
@@ -75,7 +74,7 @@ function ProductHero(props) {
 
   return (
     <>
-      <ProductHeroLayout id={'top'} backgroundClassName={classes.background}>
+      <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{background: 'none'}}>
         {/* <div style={{backgroundColor: 'white', opacity: '0.25'}}> */}
         {props.show === 1 ?
           <>
@@ -101,14 +100,14 @@ function ProductHero(props) {
           :
           props.show === 2 ?
 
-            <form>
+            <FormControl>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <InputLabel style={{ marginBottom: '30px', width: '100%' }} className={classes.formColor} >Please enter your email address:</InputLabel>
 
                 </Grid>
                 <Grid item xs={10} style={{ margin: '0 auto' }}>
-                  <Input style={{ width: '80%', color: 'white' }} type="text" id="username" placeholder="email address" name="username" value={username} onChange={handleChange} />
+                  <Input style={{ width: '80%', color: 'white' }} type="text" id="username" name="username" value={username} onChange={handleChange} />
                 </Grid>
                 <Grid item xs={12} >
                   <Button onClick={handleBack} className={classes.formColor} >
@@ -120,7 +119,7 @@ function ProductHero(props) {
                 </Grid>
 
               </Grid>
-            </form>
+            </FormControl>
             :
             <Grid container spacing={3}>
               <Grid item xs={12}>

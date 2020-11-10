@@ -40,7 +40,7 @@ function ProductSmokingHero(props) {
   return (
     <Container className={classes.root} component="section">
       <Link href={`${process.env.PUBLIC_URL}/#top`}><Button className={classes.button} onClick={handleClick} >
-        <Typography variant="h4" component="span">
+        <Typography variant="h6" component="span">
           Get started
         </Typography>
       </Button>

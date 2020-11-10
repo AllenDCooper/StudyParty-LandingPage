@@ -13,7 +13,7 @@ const styles = (theme) => ({
   },
   container: {
     marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(30),
+    marginBottom: theme.spacing(15),
     display: 'flex',
     position: 'relative',
   },
@@ -24,7 +24,7 @@ const styles = (theme) => ({
     padding: theme.spacing(0, 5),
   },
   image: {
-    width: '100%',
+    height: '200px',
   },
   title: {
     marginTop: theme.spacing(5),
@@ -53,14 +53,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/41941b32-simple-benefit-01_1000000000000000000028.png"
+                src={`${process.env.PUBLIC_URL}/images/Icon1.png`}
                 alt="suitcase"
               />
               <Typography variant="h6" className={classes.title}>
-                Headline 1
+                Find a study partner or group
               </Typography>
               <Typography variant="h5">
-                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                {'Matches are made based on complementary personalities and skills'}
               </Typography>
             </div>
           </Grid>
@@ -68,14 +68,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/1fb2b319-simple-benefit-02_1000000000000000000028.png"
+                src={`${process.env.PUBLIC_URL}/images/Icon2.png`}
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
-                Headline 2
+                Kick off your StudyParty sessions
               </Typography>
               <Typography variant="h5">
-                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                {'Take advantage of our study and motivational tools.'}
               </Typography>
             </div>
           </Grid>
@@ -83,14 +83,14 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src="https://d9hhrg4mnvzow.cloudfront.net/www.mystudyparty.com/new/5b424626-simple-benefit-03_1000000000000000000028.png"
+                src={`${process.env.PUBLIC_URL}/images/Icon3.png`}
                 alt="clock"
               />
               <Typography variant="h6" className={classes.title}>
-                Headline 3
+                Improve your score
               </Typography>
               <Typography variant="h5">
-                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '}
+                {'Ace your test while making new friends.'}
               </Typography>
             </div>
           </Grid>
