@@ -38,7 +38,7 @@ function ProductSmokingHero(props) {
     props.setShow(2);
   }
   return (
-    <Container className={classes.root} component="section">
+    <Container className={classes.root} component="section" onClick={props.clickBack}>
       <Link href={`${process.env.PUBLIC_URL}/#top`}><Button className={classes.button} onClick={handleClick} >
         <Typography variant="h6" component="span">
           Get started

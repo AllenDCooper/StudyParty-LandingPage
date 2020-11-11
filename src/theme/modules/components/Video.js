@@ -20,8 +20,8 @@ const Video = () => {
             type={"video/mp4"}
             autoPlay={true}
             loop={true}
-            muted={true}
             style={style}
+            muted={true}
         >
         </video>
     );

@@ -13,17 +13,18 @@ import AppAppBar from './modules/views/AppAppBar';
 function Index() {
 
   const [show, setShow] = useState(1);
+  const clickBack = () => setShow(1)
 
   return (
     <React.Fragment>
-      <AppAppBar />
+      <AppAppBar clickBack={clickBack}/>
       <ProductHero show={show} setShow={setShow} />
-      <ProductValues />
+      <ProductValues clickBack={clickBack}/>
       {/* <ProductCategories />
       <ProductHowItWorks />
       <ProductCTA /> */}
-      <ProductSmokingHero show={show} setShow={setShow} />
-      <AppFooter />
+      <ProductSmokingHero show={show} setShow={setShow} clickBack={clickBack}/>
+      <AppFooter clickBack={clickBack}/>
     </React.Fragment>
   );
 }

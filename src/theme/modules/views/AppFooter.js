@@ -72,11 +72,11 @@ const LANGUAGES = [
   },
 ];
 
-export default function AppFooter() {
+export default function AppFooter(props) {
   const classes = useStyles();
 
   return (
-    <Typography component="footer" className={classes.root}>
+    <Typography component="footer" className={classes.root} onClick={props.clickBack}>
       <Container className={classes.container}>
         <Grid container spacing={5} justify='center'>
           {/* <Grid item xs={12} sm={8} md={4}>

@@ -12,8 +12,8 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.secondary.light,
   },
   container: {
-    marginTop: theme.spacing(15),
-    marginBottom: theme.spacing(15),
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(10),
     display: 'flex',
     position: 'relative',
   },
@@ -24,9 +24,17 @@ const styles = (theme) => ({
     padding: theme.spacing(0, 5),
   },
   image: {
-    height: '200px',
+    height: '150px',
+    marginBottom: '30px' 
   },
-  title: {
+  title2: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+    fontFamily: 'PT Sans, sans-serif',
+    fontWeight: '700',
+    textTransform: "none",
+  },
+  title22: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
   },
@@ -41,14 +49,20 @@ function ProductValues(props) {
   const { classes } = props;
 
   return (
-    <section className={classes.root}>
+    <section className={classes.root} onClick={props.clickBack}>
       <Container className={classes.container}>
         <img
           src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
         />
+        <div>
         <Grid container spacing={5}>
+        <Grid item xs={12}>
+        <Typography variant="h4" marked="center" className={classes.title2} component="h2">
+          How It Works
+        </Typography>
+          </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <img
@@ -60,7 +74,7 @@ function ProductValues(props) {
                 Find a study partner or group
               </Typography>
               <Typography variant="h5">
-                {'Matches are made based on complementary personalities and skills'}
+                {'Match based on personalities and skills.'}
               </Typography>
             </div>
           </Grid>
@@ -95,6 +109,7 @@ function ProductValues(props) {
             </div>
           </Grid>
         </Grid>
+        </div>
       </Container>
     </section>
   );

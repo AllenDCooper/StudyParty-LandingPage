@@ -42,7 +42,6 @@ function ProductHero(props) {
   const handleNext = () => props.setShow(2);
 
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -109,7 +108,7 @@ function ProductHero(props) {
             </Typography>
             {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
             <Typography color="inherit" align="center" variant="h5" className={classes.h5} style={{ fontWeight: '400', fontSize: '16px', marginTop: '40px', maxWidth: '500px' }}>
-              Studying for the LSAT? Study Party is a new way to find a virtual study partner or group. Improve your score while meeting other future law students. Sign up to get started.
+              Studying for the LSAT? Study Party is a new way to find a virtual study partner or group. Improve your score while meeting other future law students.
             </Typography>
             <Button
               color="secondary"

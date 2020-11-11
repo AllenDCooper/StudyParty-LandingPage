@@ -50,7 +50,7 @@ function AppAppBar(props) {
   const { classes } = props;
 
   return (
-    <div>
+    <div onClick={props.clickBack}>
       <AppBar position="relative">
         <div className={classes.backdrop} />
         <Toolbar className={classes.toolbar}>
