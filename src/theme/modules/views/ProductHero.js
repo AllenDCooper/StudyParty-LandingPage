@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import { Input, InputLabel, Grid, FormControl, FormHelperText } from '@material-ui/core'
+import { TextField, Input, InputLabel, Grid, FormControl, FormHelperText } from '@material-ui/core'
 import ProductHeroLayout from './ProductHeroLayout';
 import Video from '../components/Video';
 import axios from 'axios';
@@ -126,22 +126,24 @@ function ProductHero(props) {
 
             <FormControl>
               <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <InputLabel style={{ marginBottom: '30px', width: '100%' }} className={classes.formColor} >Please enter your email address:</InputLabel>
+                <Grid item xs={12} sm={7} style={{margin: '0 auto', textAlign: 'center'}} justify="center">
+                  <h4 style={{ textAlign: "center", width: '100%' }} className={classes.formColor} >Let's start by getting your email address!</h4>
 
                 </Grid>
-                <Grid item xs={10} style={{ margin: '0 auto' }}>
-                  <Input
-                    style={{ width: '80%', color: 'black' }}
+                <Grid item xs={12} sm={7} style={{ margin: '0 auto' }}>
+                  <TextField
+                    style={{ width: '100%', color: 'black', margin: '0 auto'}}
                     type="text"
                     id="email"
                     name="email"
+                    label="email address"
+                    variant="outlined"
                     value={email}
                     onChange={handleChange}
                     error={error}
                   />
                   {error ? 
-                  <FormHelperText id="helper-text" style={{textAlign: 'center', marginTop: '20px', color: 'red'}} >{errorMessage}</FormHelperText> 
+                  <FormHelperText id="helper-text" style={{marginTop: '20px', color: 'red'}} >{errorMessage}</FormHelperText> 
                   : null}
                 </Grid>
                 <Grid item xs={12} >
