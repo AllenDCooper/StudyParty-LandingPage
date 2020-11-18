@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/StudyParty-LandingPage/static/css/main.271ab0dc.chunk.css",
-    "main.js": "/StudyParty-LandingPage/static/js/main.4d342207.chunk.js",
-    "main.js.map": "/StudyParty-LandingPage/static/js/main.4d342207.chunk.js.map",
-    "runtime-main.js": "/StudyParty-LandingPage/static/js/runtime-main.315e1fe4.js",
-    "runtime-main.js.map": "/StudyParty-LandingPage/static/js/runtime-main.315e1fe4.js.map",
-    "static/js/2.92df7dd0.chunk.js": "/StudyParty-LandingPage/static/js/2.92df7dd0.chunk.js",
-    "static/js/2.92df7dd0.chunk.js.map": "/StudyParty-LandingPage/static/js/2.92df7dd0.chunk.js.map",
-    "static/js/3.e85b9955.chunk.js": "/StudyParty-LandingPage/static/js/3.e85b9955.chunk.js",
-    "static/js/3.e85b9955.chunk.js.map": "/StudyParty-LandingPage/static/js/3.e85b9955.chunk.js.map",
+    "main.js": "/StudyParty-LandingPage/static/js/main.0493b8fb.chunk.js",
+    "main.js.map": "/StudyParty-LandingPage/static/js/main.0493b8fb.chunk.js.map",
+    "runtime-main.js": "/StudyParty-LandingPage/static/js/runtime-main.edebef18.js",
+    "runtime-main.js.map": "/StudyParty-LandingPage/static/js/runtime-main.edebef18.js.map",
+    "static/js/2.417d2472.chunk.js": "/StudyParty-LandingPage/static/js/2.417d2472.chunk.js",
+    "static/js/2.417d2472.chunk.js.map": "/StudyParty-LandingPage/static/js/2.417d2472.chunk.js.map",
+    "static/js/3.d3af4edb.chunk.js": "/StudyParty-LandingPage/static/js/3.d3af4edb.chunk.js",
+    "static/js/3.d3af4edb.chunk.js.map": "/StudyParty-LandingPage/static/js/3.d3af4edb.chunk.js.map",
     "index.html": "/StudyParty-LandingPage/index.html",
     "static/css/main.271ab0dc.chunk.css.map": "/StudyParty-LandingPage/static/css/main.271ab0dc.chunk.css.map",
-    "static/js/2.92df7dd0.chunk.js.LICENSE.txt": "/StudyParty-LandingPage/static/js/2.92df7dd0.chunk.js.LICENSE.txt",
+    "static/js/2.417d2472.chunk.js.LICENSE.txt": "/StudyParty-LandingPage/static/js/2.417d2472.chunk.js.LICENSE.txt",
     "static/media/logo.103b5fa1.svg": "/StudyParty-LandingPage/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.315e1fe4.js",
-    "static/js/2.92df7dd0.chunk.js",
+    "static/js/runtime-main.edebef18.js",
+    "static/js/2.417d2472.chunk.js",
     "static/css/main.271ab0dc.chunk.css",
-    "static/js/main.4d342207.chunk.js"
+    "static/js/main.0493b8fb.chunk.js"
   ]
 }
