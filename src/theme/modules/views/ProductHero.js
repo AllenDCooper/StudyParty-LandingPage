@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 
 const backgroundImage =
-  '';
+  `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`;
 
 const styles = (theme) => ({
   background: {
@@ -15,6 +16,13 @@ const styles = (theme) => ({
   },
   button: {
     minWidth: 200,
+  },
+  title: {
+    fontSize: 24,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    marginLeft: '20px'
   },
   h5: {
     marginBottom: theme.spacing(4),
@@ -44,13 +52,23 @@ function ProductHero(props) {
   return (
     <>
 
-    {/* Default View / No Modal */}
+      {/* Default View / No Modal */}
 
       <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{ background: 'none' }}>
         {/* {helperFunction(props.show)} */}
         <>
+          <Link
+            className="permanent-marker pink"
+            underline="none"
+            color="inherit"
+            className={classes.title}
+            href={process.env.PUBLIC_URL}
+            style={{ fontFamily: "Permanent Marker", color: "hotpink", fontSize: "48px", textAlign: 'right' }}
+          >
+            {'StudyParty!'}
+          </Link>
           <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-          <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700' }}>
+          <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '90px' }}>
             Better Scores, <br></br>More Fun
             </Typography>
           {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}

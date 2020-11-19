@@ -17,7 +17,7 @@ function Index() {
 
   return (
     <React.Fragment>
-      <AppAppBar />
+      {/* <AppAppBar /> */}
       <ProductHero show={show} setShow={setShow} />
       <ProductValues />
       {/* <ProductCategories />

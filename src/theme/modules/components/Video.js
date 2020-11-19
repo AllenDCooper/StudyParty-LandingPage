@@ -11,16 +11,22 @@ const Video = () => {
     transform: "translate(-50%, -50%)",
     minWidth: "100%",
     minHeight: "100%",
-    zIndex: -1,
+    zIndex: -5,
   };
 
   const imageStyle = {
-    position: "fixed",
+    position: "absolute",
     top: "0",
-    right: "-250px",
+    // right: "-200px",
     height: "100%",
-    // width: "100%",
-    zIndex: -1,
+    width: "100%",
+    zIndex: -5,
+    objectFit: "cover",
+  }
+
+  const divStyle = {
+    backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`,
+
   }
 
   // const getVideoSrc = width => {
@@ -32,16 +38,17 @@ const Video = () => {
   // const src = getVideoSrc(window.innerWidth);
 
   const isMobile = (width) => {
-    if (width >= 720) { return false }
+    if (width >= 740) { return false }
     return true
   }
 
   return (
     <>
       {isMobile(window.innerWidth) ?
-        <img
+        // <div style={{backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`}}>
+        //   </div>
+          <img
           src={`${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`}
-          className="video-thumb tiny"
           alt="thumb"
           style={imageStyle}
         />
