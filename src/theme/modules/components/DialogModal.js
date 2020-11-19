@@ -328,7 +328,7 @@ function DialogModal(props) {
         <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Let's start by getting your email address!
+            Let's start by getting your email address:
           </DialogContentText>
           <TextField
             style={{ width: '100%', color: 'black', margin: '0 auto' }}

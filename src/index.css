@@ -4,6 +4,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -28,6 +30,10 @@ code {
 
 .pt-serif {
   font-family: 'PT Serif', serif;
+}
+
+.lato {
+  font-family: 'Lato', sans-serif;
 }
 
 .pink {
