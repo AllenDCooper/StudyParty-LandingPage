@@ -9,22 +9,24 @@ import ProductValues from './modules/views/ProductValues';
 import ProductHowItWorks from './modules/views/ProductHowItWorks';
 import ProductCTA from './modules/views/ProductCTA';
 import AppAppBar from './modules/views/AppAppBar';
+import DialogModal from './modules/components/DialogModal';
 
 function Index() {
 
-  const [show, setShow] = useState(1);
-  const clickBack = () => setShow(1)
+  const [show, setShow] = useState(0);
 
   return (
     <React.Fragment>
-      <AppAppBar clickBack={clickBack}/>
+      <AppAppBar />
       <ProductHero show={show} setShow={setShow} />
-      <ProductValues clickBack={clickBack}/>
+      <ProductValues />
       {/* <ProductCategories />
       <ProductHowItWorks />
       <ProductCTA /> */}
-      <ProductSmokingHero show={show} setShow={setShow} clickBack={clickBack}/>
-      <AppFooter clickBack={clickBack}/>
+      <ProductSmokingHero show={show} setShow={setShow}/>
+      <DialogModal show={show} setShow={setShow} />
+      <AppFooter />
+
     </React.Fragment>
   );
 }
