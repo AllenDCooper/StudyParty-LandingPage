@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from './Button';
-import { Dialog, Radio, RadioGroup, FormControlLabel, TextField, FormHelperText } from '@material-ui/core'
+import { Select, MenuItem, Dialog, Radio, RadioGroup, FormControlLabel, TextField, FormHelperText } from '@material-ui/core'
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -96,18 +96,18 @@ function DialogModal(props) {
   }
 
   const handleTestTypeChange = (event) => {
-    console.log(event.currentTarget.value)
-    setTestType(event.currentTarget.value)
+    console.log(event.target.value)
+    setTestType(event.target.value)
   }
 
   const handleTestPrep = (event) => {
-    console.log(event.currentTarget.value)
-    setTestPrep(event.currentTarget.value)
+    console.log(event.target.value)
+    setTestPrep(event.target.value)
   }
 
   const handleGroupSizeChange = (event) => {
-    console.log(event.currentTarget.value)
-    setGroupSize(event.currentTarget.value)
+    console.log(event.target.value)
+    setGroupSize(event.target.value)
   }
 
   const handleBack = () => {
@@ -242,12 +242,12 @@ function DialogModal(props) {
           <DialogContentText>
             What test are you studying for?
           </DialogContentText>
-          <RadioGroup aria-label="test-type" name="test-type" onChange={handleTestTypeChange}>
-            <FormControlLabel value="LSAT" control={<Radio />} label="LSAT" />
-            <FormControlLabel value="GRE" control={<Radio />} label="GRE" />
-            <FormControlLabel value="GMAT" control={<Radio />} label="GMAT" />
-            <FormControlLabel value="MCAT" control={<Radio />} label="MCAT" />
-          </RadioGroup>
+          <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleTestTypeChange}>
+            <MenuItem value='LSAT' >LSAT</MenuItem>
+            <MenuItem value="GRE" >GRE</MenuItem>
+            <MenuItem value="GMAT" >GMAT</MenuItem>
+            <MenuItem value="MCAT" >MCAT</MenuItem>
+          </Select>
           {testTypeError ?
             <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testTypeErrorMessage}</FormHelperText>
             : null}
@@ -329,10 +329,10 @@ function DialogModal(props) {
             Are you looking for a study partner or group?
           </DialogContentText>
           <form className={classes.container} noValidate>
-            <RadioGroup aria-label="test-type" name="test-type" onChange={handleGroupSizeChange}>
-              <FormControlLabel value="Partner" control={<Radio />} label="Partner" />
-              <FormControlLabel value="Group" control={<Radio />} label="Group" />
-            </RadioGroup>
+            <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleGroupSizeChange}>
+              <MenuItem value="Partner">Partner</MenuItem>
+              <MenuItem value="Group">Group</MenuItem>
+            </Select>
           </form>
           {groupSizeError ?
             <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{groupSizeErrorMessage}</FormHelperText>
@@ -364,11 +364,11 @@ function DialogModal(props) {
             How much test prep have you already done?
           </DialogContentText>
           <form className={classes.container} noValidate>
-            <RadioGroup aria-label="test-prep" name="test-prep" onChange={handleTestPrep}>
-              <FormControlLabel value="A lot" control={<Radio />} label="A lot" />
-              <FormControlLabel value="A little" control={<Radio />} label="A little" />
-              <FormControlLabel value="None" control={<Radio />} label="None" />
-            </RadioGroup>
+            <Select aria-label="test-prep" name="test-prep" style={{width: '100%'}} onChange={handleTestPrep}>
+              <MenuItem value="A lot" >A lot</MenuItem>
+              <MenuItem value="A little">A little</MenuItem>
+              <MenuItem value="None">None</MenuItem>
+            </Select>
           </form>
           {testPrepError ?
             <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testPrepErrorMessage}</FormHelperText>
