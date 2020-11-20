@@ -48,7 +48,7 @@ function DialogModal(props) {
   const [testTypeErrorMessage, setTestTypeErrorMessage] = useState("");
 
   const [testDate, handleTestDate] = useState(new Date());
-  const [testDateError, setDateTypeError] = useState(null);
+  const [testDateError, setTestDateError] = useState(null);
   const [testDateErrorMessage, setTestDateErrorMessage] = useState("");
   const curDate = new Date()
 
@@ -76,6 +76,18 @@ function DialogModal(props) {
 
   const handleClose = () => {
     props.setShow(0);
+    setTestType("");
+    setTestTypeError(false);
+    setTestTypeErrorMessage("")
+    setGroupSize("");
+    setGroupSizeError(false);
+    setGroupSizeErrorMessage("");
+    setTestPrep("");
+    setTestPrepError(false);
+    setTestPrepErrorMessage("");
+    setEmail("")
+    setEmailError(false);
+    setEmailErrorMessage("")
   };
 
   const handleEmailChange = (event) => {
@@ -99,10 +111,7 @@ function DialogModal(props) {
   }
 
   const handleBack = () => {
-    console.log('handleBack run')
     props.setShow(props.show - 1);
-    setEmailError(false);
-    setEmailErrorMessage("");
   }
 
   const sendToGoogleForms = (email, testType, testDate, testPrep, groupSize) => {
@@ -132,6 +141,70 @@ function DialogModal(props) {
     return (false)
   }
 
+  const handleNextTestType = (event) => {
+    event.preventDefault()
+    if (testType) {
+      handleNext()
+    } else {
+      setTestTypeError(true);
+      setTestTypeErrorMessage("Please select an option")
+    }
+  }
+
+  const handleBackTestType = (event) => {
+    setTestType("");
+    setTestTypeError(false);
+    setTestTypeErrorMessage("")
+    handleBack()
+  }
+
+  const handleNextGroupSize = (event) => {
+    event.preventDefault()
+    if (groupSize) {
+      handleNext()
+    } else {
+      setGroupSizeError(true);
+      setGroupSizeErrorMessage("Please select an option")
+    }
+  }
+
+  const handleBackGroupSize = () => {
+    setGroupSize("");
+    setGroupSizeError(false);
+    setGroupSizeErrorMessage("");
+    handleBack();
+  }
+
+  const handleNextTestPrep = (event) => {
+    event.preventDefault()
+    if (testPrep) {
+      handleNext()
+    } else {
+      setTestPrepError(true);
+      setTestPrepErrorMessage("Please select an option")
+    }
+  }
+
+  const handleBackTestPrep = () => {
+    setTestPrep("");
+    setTestPrepError(false);
+    setTestPrepErrorMessage("");
+    handleBack();
+  }
+
+  const handleBackTestDate = () => {
+    setTestDateError(false);
+    setTestDateErrorMessage("");
+    handleBack();
+  }
+
+  const handleBackEmail = () => {
+    setEmail("");
+    setEmailError(false);
+    setEmailErrorMessage("");
+    handleBack();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     if (ValidateEmail(email)) {
@@ -140,10 +213,6 @@ function DialogModal(props) {
       setEmailError(true);
       setEmailErrorMessage("Please enter a valid email address")
     }
-  }
-
-  const handleExit = () => {
-    props.setShow(1)
   }
 
   const completeSubmit = () => {
@@ -184,10 +253,10 @@ function DialogModal(props) {
             : null}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBack} color="primary">
+          <Button onClick={handleBackTestType} color="primary">
             Back
           </Button>
-          <Button onClick={handleNext} color="primary">
+          <Button onClick={handleNextTestType} color="primary">
             Next
           </Button>
         </DialogActions>
@@ -235,7 +304,7 @@ function DialogModal(props) {
             : null}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBack} color="primary">
+          <Button onClick={handleBackTestDate} color="primary">
             Back
           </Button>
           <Button onClick={handleNext} color="primary">
@@ -270,10 +339,10 @@ function DialogModal(props) {
             : null}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBack} color="primary">
+          <Button onClick={handleBackGroupSize} color="primary">
             Back
           </Button>
-          <Button onClick={handleNext} color="primary">
+          <Button onClick={handleNextGroupSize} color="primary">
             Next
           </Button>
         </DialogActions>
@@ -295,21 +364,21 @@ function DialogModal(props) {
             How much test prep have you already done?
           </DialogContentText>
           <form className={classes.container} noValidate>
-            <RadioGroup aria-label="test-type" name="test-type" onChange={handleTestPrep}>
+            <RadioGroup aria-label="test-prep" name="test-prep" onChange={handleTestPrep}>
               <FormControlLabel value="A lot" control={<Radio />} label="A lot" />
               <FormControlLabel value="A little" control={<Radio />} label="A little" />
               <FormControlLabel value="None" control={<Radio />} label="None" />
             </RadioGroup>
           </form>
-          {groupSizeError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{groupSizeErrorMessage}</FormHelperText>
+          {testPrepError ?
+            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testPrepErrorMessage}</FormHelperText>
             : null}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBack} color="primary">
+          <Button onClick={handleBackTestPrep} color="primary">
             Back
           </Button>
-          <Button onClick={handleNext} color="primary">
+          <Button onClick={handleNextTestPrep} color="primary">
             Next
           </Button>
         </DialogActions>
@@ -346,7 +415,7 @@ function DialogModal(props) {
             : null}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleBack} color="primary">
+          <Button onClick={handleBackEmail} color="primary">
             Back
           </Button>
           <Button onClick={handleSubmit} color="primary">

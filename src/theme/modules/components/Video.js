@@ -24,11 +24,6 @@ const Video = () => {
     objectFit: "cover",
   }
 
-  const divStyle = {
-    backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`,
-
-  }
-
   // const getVideoSrc = width => {
   //   if (width >= 1080) return `${process.env.PUBLIC_URL}/assets/background_video_cropped_mirror.mp4`;
   //   if (width >= 720) return `${process.env.PUBLIC_URL}/assets/background_video_cropped_mirror.mp4`;
@@ -44,25 +39,31 @@ const Video = () => {
 
   return (
     <>
-      {isMobile(window.innerWidth) ?
+      {window.innerWidth <= 400 ?
         // <div style={{backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`}}>
         //   </div>
-          <img
-          src={`${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`}
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/video_screenshot3.jpg`}
           alt="thumb"
           style={imageStyle}
         />
         :
-
-        <video
-          src={`${process.env.PUBLIC_URL}/assets/background_video_cropped_mirror.mp4`}
-          type={"video/mp4"}
-          autoPlay={true}
-          loop={true}
-          style={style}
-          muted={true}
-        >
-        </video>
+        window.innerWidth <= 740 ?
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/video_screenshot2.jpg`}
+            alt="thumb"
+            style={imageStyle}
+          />
+          :
+          <video
+            src={`${process.env.PUBLIC_URL}/assets/background_video_cropped_mirror.mp4`}
+            type={"video/mp4"}
+            autoPlay={true}
+            loop={true}
+            style={style}
+            muted={true}
+          >
+          </video>
       }
     </>
   );
