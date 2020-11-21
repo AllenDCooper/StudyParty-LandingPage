@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/StudyParty-LandingPage/static/css/main.7019d58c.chunk.css",
-    "main.js": "/StudyParty-LandingPage/static/js/main.0539c93b.chunk.js",
-    "main.js.map": "/StudyParty-LandingPage/static/js/main.0539c93b.chunk.js.map",
+    "main.css": "/StudyParty-LandingPage/static/css/main.cbeb55b0.chunk.css",
+    "main.js": "/StudyParty-LandingPage/static/js/main.b1858ec3.chunk.js",
+    "main.js.map": "/StudyParty-LandingPage/static/js/main.b1858ec3.chunk.js.map",
     "runtime-main.js": "/StudyParty-LandingPage/static/js/runtime-main.00fbcb2e.js",
     "runtime-main.js.map": "/StudyParty-LandingPage/static/js/runtime-main.00fbcb2e.js.map",
     "static/js/2.bd1acc59.chunk.js": "/StudyParty-LandingPage/static/js/2.bd1acc59.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.dc02cd27.chunk.js": "/StudyParty-LandingPage/static/js/3.dc02cd27.chunk.js",
     "static/js/3.dc02cd27.chunk.js.map": "/StudyParty-LandingPage/static/js/3.dc02cd27.chunk.js.map",
     "index.html": "/StudyParty-LandingPage/index.html",
-    "static/css/main.7019d58c.chunk.css.map": "/StudyParty-LandingPage/static/css/main.7019d58c.chunk.css.map",
+    "static/css/main.cbeb55b0.chunk.css.map": "/StudyParty-LandingPage/static/css/main.cbeb55b0.chunk.css.map",
     "static/js/2.bd1acc59.chunk.js.LICENSE.txt": "/StudyParty-LandingPage/static/js/2.bd1acc59.chunk.js.LICENSE.txt",
     "static/media/logo.103b5fa1.svg": "/StudyParty-LandingPage/static/media/logo.103b5fa1.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.00fbcb2e.js",
     "static/js/2.bd1acc59.chunk.js",
-    "static/css/main.7019d58c.chunk.css",
-    "static/js/main.0539c93b.chunk.js"
+    "static/css/main.cbeb55b0.chunk.css",
+    "static/js/main.b1858ec3.chunk.js"
   ]
 }
