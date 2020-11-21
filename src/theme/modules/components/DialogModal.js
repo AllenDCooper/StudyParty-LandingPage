@@ -242,7 +242,7 @@ function DialogModal(props) {
           <DialogContentText>
             What test are you studying for?
           </DialogContentText>
-          <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleTestTypeChange}>
+          <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleTestTypeChange} value={testType}>
             <MenuItem value='LSAT' >LSAT</MenuItem>
             <MenuItem value="GRE" >GRE</MenuItem>
             <MenuItem value="GMAT" >GMAT</MenuItem>
@@ -329,7 +329,7 @@ function DialogModal(props) {
             Are you looking for a study partner or group?
           </DialogContentText>
           <form className={classes.container} noValidate>
-            <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleGroupSizeChange}>
+            <Select aria-label="group-size" name="group-size" style={{width: '100%'}} onChange={handleGroupSizeChange} value={groupSize}>
               <MenuItem value="Partner">Partner</MenuItem>
               <MenuItem value="Group">Group</MenuItem>
             </Select>
@@ -364,7 +364,7 @@ function DialogModal(props) {
             How much test prep have you already done?
           </DialogContentText>
           <form className={classes.container} noValidate>
-            <Select aria-label="test-prep" name="test-prep" style={{width: '100%'}} onChange={handleTestPrep}>
+            <Select aria-label="test-prep" name="test-prep" style={{width: '100%'}} onChange={handleTestPrep} value={testPrep}>
               <MenuItem value="A lot" >A lot</MenuItem>
               <MenuItem value="A little">A little</MenuItem>
               <MenuItem value="None">None</MenuItem>
