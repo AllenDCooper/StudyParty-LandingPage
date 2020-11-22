@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from './Button';
-import { Select, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Radio, RadioGroup, FormControlLabel, TextField, FormHelperText } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormHelperText } from '@material-ui/core'
 import { DatePicker } from "@material-ui/pickers";
 
 const styles = (theme) => ({
@@ -14,10 +14,12 @@ const styles = (theme) => ({
 function DateInput(props) {
   const { classes } = props;
 
+  // destructure question object from props
   const { questionName, questionText, questionErrorMessage } = props.questionObj;
 
   const questionNum = props.index + 1;
 
+  // hooks
   const [value, setValue] = useState(new Date());
   const [error, setError] = useState("null");
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,7 +46,7 @@ function DateInput(props) {
       props.setShow(props.show + 1)
     } else {
       setError(true);
-      setErrorMessage(props.errorMessage);
+      setErrorMessage(questionErrorMessage);
     };
   };
 

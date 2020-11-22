@@ -20,9 +20,9 @@ const styles = (theme) => ({
 function DialogModal(props) {
 
   console.log(questionArr);
-
   const { classes } = props;
 
+  // Instantiates an array to capture answers and to be stored in state
   const initialValueArr = questionArr.map((item) => {
     const name = item.name;
     const newObj = {}
@@ -30,6 +30,7 @@ function DialogModal(props) {
     return newObj
   })
 
+  // Hooks
   const [valueArr, setValueArr] = useState(initialValueArr);
   const [responseRecieved, setResponseRecieved] = useState(false);
   const [submitError, setSubmitError] = useState(false);
@@ -38,7 +39,7 @@ function DialogModal(props) {
     props.setShow(0);
   };
 
-
+  // Sends data to populate Google Sheet
   const sendToGoogleForms = () => {
     props.setShow(props.show + 1);
     console.log(props.show)
@@ -61,6 +62,7 @@ function DialogModal(props) {
         console.log(response)
       })
       .catch(function (error) {
+        setSubmitError(true);
         console.log(error)
       })
   }
@@ -71,6 +73,7 @@ function DialogModal(props) {
 
   return (
     <>
+    {/* Autogenerate form from question array */}
       {questionArr.map((item, index) =>
         item.questionType === 'dropdown' ?
           <Dropdown
@@ -111,7 +114,7 @@ function DialogModal(props) {
               null
       )}
 
-      {/* Thank You */}
+      {/* Display upon submission */}
       <Dialog
         open={props.show === (questionArr.length + 1)}
         onClose={handleClose}

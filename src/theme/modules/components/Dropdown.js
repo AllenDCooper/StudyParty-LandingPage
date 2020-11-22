@@ -14,10 +14,12 @@ function Dropdown(props) {
   console.log(props);
   const { classes } = props;
 
+  // destructure question object from props
   const { questionName, questionText, answerOptionsArr, questionErrorMessage } = props.questionObj;
 
   const questionNum = props.index + 1;
 
+  // hooks
   const [value, setValue] = useState("");
   const [error, setError] = useState("null");
   const [errorMessage, setErrorMessage] = useState("");
