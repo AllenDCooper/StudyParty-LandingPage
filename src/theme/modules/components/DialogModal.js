@@ -1,120 +1,49 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from './Button';
-import { Select, MenuItem, Dialog, Radio, RadioGroup, FormControlLabel, TextField, FormHelperText } from '@material-ui/core'
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, CircularProgress } from '@material-ui/core'
 import axios from 'axios';
-import { DatePicker } from "@material-ui/pickers";
+// import components
+import Button from './Button';
+import Dropdown from './Dropdown';
+import EmailInput from './EmailInput';
+import DateInput from './DateInput';
+// import question data
+import questionArr from '../data/questionArr';
 
 const styles = (theme) => ({
-  background: {
-    // backgroundColor: '#7fc7d9', // Average color of the background image.
-    backgroundPosition: 'center',
-  },
   button: {
     minWidth: 200,
   },
-  h5: {
-    marginBottom: theme.spacing(4),
-    marginTop: theme.spacing(4),
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(10),
-    },
-  },
-  more: {
-    marginTop: theme.spacing(2),
-  },
-  formColor: {
-    color: 'black'
-  }
 });
 
 function DialogModal(props) {
-  console.log(props)
+
+  console.log(questionArr);
+
   const { classes } = props;
 
-  const handleNext = () => props.setShow(props.show + 1);
+  const initialValueArr = questionArr.map((item) => {
+    const name = item.name;
+    const newObj = {}
+    newObj[name] = null
+    return newObj
+  })
 
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(null);
-  const [emailErrorMessage, setEmailErrorMessage] = useState("");
-
-  const [testType, setTestType] = useState("");
-  const [testTypeError, setTestTypeError] = useState(null);
-  const [testTypeErrorMessage, setTestTypeErrorMessage] = useState("");
-
-  const [testDate, handleTestDate] = useState(new Date());
-  const [testDateError, setTestDateError] = useState(null);
-  const [testDateErrorMessage, setTestDateErrorMessage] = useState("");
-  const curDate = new Date()
-
-  const getFutureDate = () => {
-    const curDateCopy = new Date()
-    curDateCopy.setMonth(curDateCopy.getMonth() + 12)
-    return curDateCopy
-  }
-
-  const [testPrep, setTestPrep] = useState("");
-  const [testPrepError, setTestPrepError] = useState(null);
-  const [testPrepErrorMessage, setTestPrepErrorMessage] = useState("");
-
-  const [groupSize, setGroupSize] = useState("");
-  const [groupSizeError, setGroupSizeError] = useState(null);
-  const [groupSizeErrorMessage, setGroupSizeErrorMessage] = useState("");
-
-  const [open, setOpen] = useState(0);
-
-
-  const handleClickOpen = () => {
-    console.log('handleClickOpen run')
-    props.setShow(1);
-  };
+  const [valueArr, setValueArr] = useState(initialValueArr);
+  const [responseRecieved, setResponseRecieved] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleClose = () => {
     props.setShow(0);
-    setTestType("");
-    setTestTypeError(false);
-    setTestTypeErrorMessage("")
-    setGroupSize("");
-    setGroupSizeError(false);
-    setGroupSizeErrorMessage("");
-    setTestPrep("");
-    setTestPrepError(false);
-    setTestPrepErrorMessage("");
-    setEmail("")
-    setEmailError(false);
-    setEmailErrorMessage("")
   };
 
-  const handleEmailChange = (event) => {
-    console.log(event.currentTarget.value)
-    setEmail(event.currentTarget.value)
-  }
 
-  const handleTestTypeChange = (event) => {
-    console.log(event.target.value)
-    setTestType(event.target.value)
-  }
-
-  const handleTestPrep = (event) => {
-    console.log(event.target.value)
-    setTestPrep(event.target.value)
-  }
-
-  const handleGroupSizeChange = (event) => {
-    console.log(event.target.value)
-    setGroupSize(event.target.value)
-  }
-
-  const handleBack = () => {
-    props.setShow(props.show - 1);
-  }
-
-  const sendToGoogleForms = (email, testType, testDate, testPrep, groupSize) => {
+  const sendToGoogleForms = () => {
+    props.setShow(props.show + 1);
+    console.log(props.show)
+    console.log(valueArr)
+    const [testType, testDate, groupSize, testPrep, email] = valueArr
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
@@ -127,6 +56,8 @@ function DialogModal(props) {
       }
     })
       .then(function (response) {
+        setResponseRecieved(true);
+        console.log("submitted");
         console.log(response)
       })
       .catch(function (error) {
@@ -134,317 +65,92 @@ function DialogModal(props) {
       })
   }
 
-  const ValidateEmail = (emailTest) => {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailTest)) {
-      return (true)
-    }
-    return (false)
-  }
-
-  const handleNextTestType = (event) => {
-    event.preventDefault()
-    if (testType) {
-      handleNext()
-    } else {
-      setTestTypeError(true);
-      setTestTypeErrorMessage("Please select an option")
-    }
-  }
-
-  const handleBackTestType = (event) => {
-    setTestType("");
-    setTestTypeError(false);
-    setTestTypeErrorMessage("")
-    handleBack()
-  }
-
-  const handleNextGroupSize = (event) => {
-    event.preventDefault()
-    if (groupSize) {
-      handleNext()
-    } else {
-      setGroupSizeError(true);
-      setGroupSizeErrorMessage("Please select an option")
-    }
-  }
-
-  const handleBackGroupSize = () => {
-    setGroupSize("");
-    setGroupSizeError(false);
-    setGroupSizeErrorMessage("");
-    handleBack();
-  }
-
-  const handleNextTestPrep = (event) => {
-    event.preventDefault()
-    if (testPrep) {
-      handleNext()
-    } else {
-      setTestPrepError(true);
-      setTestPrepErrorMessage("Please select an option")
-    }
-  }
-
-  const handleBackTestPrep = () => {
-    setTestPrep("");
-    setTestPrepError(false);
-    setTestPrepErrorMessage("");
-    handleBack();
-  }
-
-  const handleBackTestDate = () => {
-    setTestDateError(false);
-    setTestDateErrorMessage("");
-    handleBack();
-  }
-
-  const handleBackEmail = () => {
-    setEmail("");
-    setEmailError(false);
-    setEmailErrorMessage("");
-    handleBack();
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    if (ValidateEmail(email)) {
-      completeSubmit()
-    } else {
-      setEmailError(true);
-      setEmailErrorMessage("Please enter a valid email address")
-    }
-  }
-
-  const completeSubmit = () => {
-    console.log(email, testType, testDate.getMonth() + 1, testDate.getFullYear(), testPrep, groupSize);
-    sendToGoogleForms(email, testType, testDate, testPrep, groupSize);
-    console.log("submitted");
-    setEmail("");
-    setTestType("");
-    props.setShow(props.show + 1);
+  const handleSubmit = () => {
+    sendToGoogleForms();
   }
 
   return (
     <>
+      {questionArr.map((item, index) =>
+        item.questionType === 'dropdown' ?
+          <Dropdown
+            questionObj={item}
+            valueArr={valueArr}
+            setValueArr={setValueArr}
+            show={props.show}
+            setShow={props.setShow}
+            index={index}
+            questionArrLength={questionArr.length}
+            handleSubmit={handleSubmit}
+            handleClose={handleClose} />
+          :
+          item.questionType === 'emailInput' ?
+            <EmailInput
+              questionObj={item}
+              valueArr={valueArr}
+              setValueArr={setValueArr}
+              show={props.show}
+              setShow={props.setShow}
+              index={index}
+              questionArrLength={questionArr.length}
+              handleSubmit={handleSubmit}
+              handleClose={handleClose} />
+            :
+            item.questionType === 'dateSelect' ?
+              <DateInput
+                questionObj={item}
+                valueArr={valueArr}
+                setValueArr={setValueArr}
+                show={props.show}
+                setShow={props.setShow}
+                index={index}
+                questionArrLength={questionArr.length}
+                handleSubmit={handleSubmit}
+                handleClose={handleClose} />
+              :
+              null
+      )}
 
-      {/* Dialog #1: Test Type */}
-
+      {/* Thank You */}
       <Dialog
-        open={props.show === 1}
+        open={props.show === (questionArr.length + 1)}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         fullWidth={true}
         maxWidth={'sm'}
         transitionDuration={400}
       >
-        <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            What test are you studying for?
+        {!responseRecieved ?
+          <DialogContentText
+            style={{
+              textAlign: 'center',
+              height: '250px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <CircularProgress />
           </DialogContentText>
-          <Select aria-label="test-type" name="test-type" style={{width: '100%'}} onChange={handleTestTypeChange} value={testType}>
-            <MenuItem value='LSAT' >LSAT</MenuItem>
-            <MenuItem value="GRE" >GRE</MenuItem>
-            <MenuItem value="GMAT" >GMAT</MenuItem>
-            <MenuItem value="MCAT" >MCAT</MenuItem>
-          </Select>
-          {testTypeError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testTypeErrorMessage}</FormHelperText>
-            : null}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleBackTestType} color="primary">
-            Back
-          </Button>
-          <Button onClick={handleNextTestType} color="primary">
-            Next
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog #2: What is your anticipated test date? */}
-
-      <Dialog
-        open={props.show === 2}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        fullWidth={true}
-        maxWidth={'sm'}
-        transitionDuration={400}
-      >
-        <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            What is your anticipated test date?
+          :
+          <>
+            <DialogTitle id="form-dialog-title">Thank you!</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {!submitError ?
+                  `Thanks for signing up! We'll be in touch soon.`
+                  :
+                  `There was an error. Please try again.`
+                }
+                <br></br><br></br>Cheers,<br></br>Team StudyParty
           </DialogContentText>
-          <form className={classes.container} noValidate>
-            <DatePicker
-              views={["year", "month"]}
-              label="Year and Month"
-              // helperText="With min and max"
-              minDate={curDate}
-              maxDate={getFutureDate()}
-              value={testDate}
-              onChange={handleTestDate}
-            />
-            {/* <DatePicker
-              variant="inline"
-              openTo="year"
-              views={["year", "month"]}
-              label="Year and Month"
-              // helperText="Start from year selection"
-              minDate={curDate}
-              maxDate={getFutureDate()}
-              value={testDate}
-              onChange={handleTestDate}
-            /> */}
-          </form>
-          {testDateError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testDateErrorMessage}</FormHelperText>
-            : null}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleBackTestDate} color="primary">
-            Back
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Back to Home
           </Button>
-          <Button onClick={handleNext} color="primary">
-            Next
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog #3: Group Size */}
-
-      <Dialog
-        open={props.show === 3}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        fullWidth={true}
-        maxWidth={'sm'}
-        transitionDuration={400}
-      >
-        <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you looking for a study partner or group?
-          </DialogContentText>
-          <form className={classes.container} noValidate>
-            <Select aria-label="group-size" name="group-size" style={{width: '100%'}} onChange={handleGroupSizeChange} value={groupSize}>
-              <MenuItem value="Partner">Partner</MenuItem>
-              <MenuItem value="Group">Group</MenuItem>
-            </Select>
-          </form>
-          {groupSizeError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{groupSizeErrorMessage}</FormHelperText>
-            : null}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleBackGroupSize} color="primary">
-            Back
-          </Button>
-          <Button onClick={handleNextGroupSize} color="primary">
-            Next
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog #4: Test Prep */}
-
-      <Dialog
-        open={props.show === 4}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        fullWidth={true}
-        maxWidth={'sm'}
-        transitionDuration={400}
-      >
-        <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            How much test prep have you already done?
-          </DialogContentText>
-          <form className={classes.container} noValidate>
-            <Select aria-label="test-prep" name="test-prep" style={{width: '100%'}} onChange={handleTestPrep} value={testPrep}>
-              <MenuItem value="A lot" >A lot</MenuItem>
-              <MenuItem value="A little">A little</MenuItem>
-              <MenuItem value="None">None</MenuItem>
-            </Select>
-          </form>
-          {testPrepError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{testPrepErrorMessage}</FormHelperText>
-            : null}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleBackTestPrep} color="primary">
-            Back
-          </Button>
-          <Button onClick={handleNextTestPrep} color="primary">
-            Next
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog #5: Email */}
-
-      <Dialog
-        open={props.show === 5}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        fullWidth={true}
-        maxWidth={'sm'}
-        transitionDuration={400}
-      >
-        <DialogTitle id="form-dialog-title">Sign up!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Let's start by getting your email address:
-          </DialogContentText>
-          <TextField
-            style={{ width: '100%', color: 'black', margin: '0 auto' }}
-            type="text"
-            id="email"
-            name="email"
-            label="email address"
-            variant="outlined"
-            value={email}
-            onChange={handleEmailChange}
-            error={emailError}
-          />
-          {emailError ?
-            <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{emailErrorMessage}</FormHelperText>
-            : null}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleBackEmail} color="primary">
-            Back
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Dialog #5: Thank You */}
-
-      <Dialog
-        open={props.show === 6}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        fullWidth={true}
-        maxWidth={'sm'}
-        transitionDuration={400}
-      >
-        <DialogTitle id="form-dialog-title">Thank you!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Thanks for your submission!  We'll be in touch soon. <br></br><br></br>Cheers,<br></br>Team StudyParty
-          </DialogContentText>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Back to Home
-          </Button>
-          </DialogActions>
-        </DialogContent>
+              </DialogActions>
+            </DialogContent>
+          </>
+        }
       </Dialog>
     </>
   )
