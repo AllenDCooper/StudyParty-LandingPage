@@ -8,6 +8,7 @@ import Button from './Button';
 import Dropdown from './Dropdown';
 import EmailInput from './EmailInput';
 import DateInput from './DateInput';
+import ShortAnswerInput from './ShortAnswerInput';
 // import question data
 import questionArr from '../data/questionArr';
 
@@ -44,16 +45,19 @@ function DialogModal(props) {
     props.setShow(props.show + 1);
     console.log(props.show)
     console.log(valueArr)
-    const [testType, testDate, groupSize, testPrep, email] = valueArr
+    const [testType, testDate, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
         email: email,
+        name: name,
         testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
         testPrep: testPrep,
-        groupSize: groupSize
+        groupSize: groupSize,
+        targetScore: targetScore,
+        targetSection: targetSection
       }
     })
       .then(function (response) {
@@ -101,6 +105,18 @@ function DialogModal(props) {
             :
             item.questionType === 'dateSelect' ?
               <DateInput
+                questionObj={item}
+                valueArr={valueArr}
+                setValueArr={setValueArr}
+                show={props.show}
+                setShow={props.setShow}
+                index={index}
+                questionArrLength={questionArr.length}
+                handleSubmit={handleSubmit}
+                handleClose={handleClose} />
+              :
+              item.questionType === 'shortAnswer' ?
+              <ShortAnswerInput
                 questionObj={item}
                 valueArr={valueArr}
                 setValueArr={setValueArr}
