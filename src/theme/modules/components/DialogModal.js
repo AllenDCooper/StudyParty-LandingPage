@@ -9,6 +9,7 @@ import Dropdown from './Dropdown';
 import EmailInput from './EmailInput';
 import DateInput from './DateInput';
 import ShortAnswerInput from './ShortAnswerInput';
+import CalendarInput from './CalendarInput';
 // import question data
 import questionArr from '../data/questionArr';
 
@@ -45,15 +46,17 @@ function DialogModal(props) {
     props.setShow(props.show + 1);
     console.log(props.show)
     console.log(valueArr)
-    const [testType, testDate, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
+    const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
+    console.log(availability.start)
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
         email: email,
         name: name,
-        testType: testType,
+        // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
+        availability: availability.start,
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
@@ -77,7 +80,7 @@ function DialogModal(props) {
 
   return (
     <>
-    {/* Autogenerate form from question array */}
+      {/* Autogenerate form from question array */}
       {questionArr.map((item, index) =>
         item.questionType === 'dropdown' ?
           <Dropdown
@@ -116,18 +119,30 @@ function DialogModal(props) {
                 handleClose={handleClose} />
               :
               item.questionType === 'shortAnswer' ?
-              <ShortAnswerInput
-                questionObj={item}
-                valueArr={valueArr}
-                setValueArr={setValueArr}
-                show={props.show}
-                setShow={props.setShow}
-                index={index}
-                questionArrLength={questionArr.length}
-                handleSubmit={handleSubmit}
-                handleClose={handleClose} />
-              :
-              null
+                <ShortAnswerInput
+                  questionObj={item}
+                  valueArr={valueArr}
+                  setValueArr={setValueArr}
+                  show={props.show}
+                  setShow={props.setShow}
+                  index={index}
+                  questionArrLength={questionArr.length}
+                  handleSubmit={handleSubmit}
+                  handleClose={handleClose} />
+                :
+                item.questionType === 'calendar' ?
+                  <CalendarInput
+                    questionObj={item}
+                    valueArr={valueArr}
+                    setValueArr={setValueArr}
+                    show={props.show}
+                    setShow={props.setShow}
+                    index={index}
+                    questionArrLength={questionArr.length}
+                    handleSubmit={handleSubmit}
+                    handleClose={handleClose} />
+                  :
+                  null
       )}
 
       {/* Display upon submission */}

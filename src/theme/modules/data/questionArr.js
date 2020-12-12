@@ -1,15 +1,20 @@
 const questionArr = [
-  {
-    questionName: 'testType',
-    questionText: 'Which test are you studying for?',
-    answerOptionsArr: ['LSAT', 'GRE', 'GMAT', 'MCAT'],
-    questionErrorMessage: 'Please select an option',
-    questionType: 'dropdown'
-  },
+  // {
+  //   questionName: 'testType',
+  //   questionText: 'Which test are you studying for?',
+  //   answerOptionsArr: ['LSAT', 'GRE', 'GMAT', 'MCAT'],
+  //   questionErrorMessage: 'Please select an option',
+  //   questionType: 'dropdown'
+  // },
   {
     questionName: 'testDate',
     questionText: 'What is your anticipated test date?',
     questionType: 'dateSelect'
+  },
+  {
+    questionName: 'availability',
+    questionText: 'When are you available for a study session?',
+    questionType: 'calendar'
   },
   {
     questionName: 'studyGroup',
@@ -34,22 +39,22 @@ const questionArr = [
   },
   {
     questionName: 'targetSection',
-    questionText: 'Which GMAT section are you studying for the most ?',
+    questionText: 'Which GMAT section are you studying for the most?',
     answerOptionsArr: ['Quantitative', 'Verbal', 'Both'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
-  },
-  {
-    questionName: 'email',
-    questionText: 'Please provide your email address:',
-    questionErrorMessage: 'Please enter a valid email address',
-    questionType: 'emailInput'
   },
   {
     questionName: 'name',
     questionText: 'Please provide your name:',
     questionErrorMessage: 'Please enter your name',
     questionType: 'shortAnswer'
+  },
+  {
+    questionName: 'email',
+    questionText: 'Please provide your email address:',
+    questionErrorMessage: 'Please enter a valid email address',
+    questionType: 'emailInput'
   },
 ]
 

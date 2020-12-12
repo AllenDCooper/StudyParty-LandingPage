@@ -57,7 +57,7 @@ function ProductHero(props) {
       <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{ background: 'none' }}>
         {/* {helperFunction(props.show)} */}
         <>
-          <Link
+          {/* <Link
             className="permanent-marker pink"
             underline="none"
             color="inherit"
@@ -66,7 +66,7 @@ function ProductHero(props) {
             style={{ fontFamily: "Permanent Marker", color: "hotpink", fontSize: "48px", textAlign: 'right' }}
           >
             {'StudyParty!'}
-          </Link>
+          </Link> */}
           <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
           <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '90px' }}>
             Better Scores, <br></br>More Fun
