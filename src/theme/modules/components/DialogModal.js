@@ -47,7 +47,7 @@ function DialogModal(props) {
     console.log(props.show)
     console.log(valueArr)
     const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
-    console.log(availability.start)
+    console.log(availability)
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
@@ -56,7 +56,9 @@ function DialogModal(props) {
         // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
-        availability: availability.start,
+        availabilityOne: availability[0].timeClicked.start,
+        availabilityTwo: availability[1].timeClicked.start,
+        availabilityThree: availability[2].timeClicked.start,
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,

@@ -6,64 +6,28 @@ import interactionPlugin from '@fullcalendar/interaction'
 import calendarEvents from '../data/calendarEvents';
 // import { INITIAL_EVENTS, createEventId } from './event-utils'
 
-export default class CalenderSelect extends React.Component {
+class CalendarSelect extends React.Component {
 
   state = {
     // weekendsVisible: true,
-    eventsClicked: []
+    eventsClickedArr: []
   }
 
   getVisibleRange = () => {
     const startDate = calendarEvents[0].start;
     const endDate = calendarEvents[6].start;
     return ({
-        start: startDate,
-        end: endDate
+      start: startDate,
+      end: endDate
     })
   }
 
-  render() {
-    return (
-      <div className='demo-app'>
-        {this.renderSidebar()}
-        <div className='demo-app-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={false}
-            initialView='timeGrid'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            // visibleRange={calendarEvents[0].start, calendarEvents[6].start}
-            visibleRange={this.getVisibleRange()}
-            // weekends={this.state.weekendsVisible}
-            initialEvents={calendarEvents}
-            // select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-          /* you can update a remote database when these fire:
-          eventAdd={function(){}}
-          eventChange={function(){}}
-          eventRemove={function(){}}
-          */
-          />
-        </div>
-      </div>
-    )
-  }
 
   renderSidebar() {
     return (
       <div className='demo-app-sidebar'>
         <div className='demo-app-sidebar-section'>
-          {/* <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul> */}
+          <p className='availability-error-msg'>{this.props.error}</p>
         </div>
         <div className='demo-app-sidebar-section'>
           {/* <label>
@@ -77,7 +41,8 @@ export default class CalenderSelect extends React.Component {
         </div>
         <div className='demo-app-sidebar-section'>
           <h2>
-            {renderSidebarEvent(this.props.value)}
+            {this.state.eventsClickedArr.map(item => this.renderSidebarEvent(item.timeClicked)
+            )}
           </h2>
         </div>
       </div>
@@ -107,14 +72,62 @@ export default class CalenderSelect extends React.Component {
     }
   }
 
+  toggleStyle = (element) => {
+    element.style.backgroundColor === 'green' ? element.style.backgroundColor = '#3788d8' : element.style.backgroundColor = 'green'
+  }
+
   handleEventClick = (clickInfo) => {
-    // if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-    //   clickInfo.event.remove()
-    // }
+
+    const eventId = clickInfo.event._instance.instanceId
+    console.log(eventId);
+
     const timeClicked = clickInfo.event._instance.range
+    console.log(timeClicked);
+
     this.props.onChange(timeClicked);
 
-    console.log(clickInfo.event._instance.range)
+    const eventElement = clickInfo.el
+
+    // console.log(clickInfo.el)
+
+    // console.log(clickInfo.event._instance.range)
+    // console.log(clickInfo.event._instance)
+    // console.log(clickInfo.event._instance.instanceId)
+
+    this.setState(prevState => {
+      let eventsClickedArr = [...prevState.eventsClickedArr]
+      console.log(eventsClickedArr)
+      let matchFound = false
+      let matchIndex = ''
+      eventsClickedArr.forEach((item, index) => {
+        if (item.eventId === eventId) {
+          matchFound = true;
+          matchIndex = index;
+        }
+      })
+      console.log(`matchFound: ${matchFound}`);
+      console.log(`matchIndex: ${matchIndex}`);
+      if (matchFound) {
+        eventsClickedArr.splice(matchIndex, 1)
+        console.log(clickInfo.el)
+        clickInfo.el.style.backgroundColor = 'rgb(55, 136, 216)'
+        console.log(clickInfo.el)
+      } else if (matchFound === false && eventsClickedArr.length < 3) {
+        console.log('run else if')
+        console.log(clickInfo.el.style.backgroundColor)
+        clickInfo.el.style.backgroundColor = 'green'
+        console.log(clickInfo.el.style.backgroundColor)
+        let dateObj = { eventId: eventId, timeClicked: timeClicked }
+        console.log(dateObj)
+        eventsClickedArr.push(dateObj)
+        console.log(eventsClickedArr[0])
+      }
+      return {
+        eventsClickedArr
+      }
+    },
+      () => { this.props.onChange(this.state.eventsClickedArr) }
+    )
   }
 
   handleEvents = (events) => {
@@ -123,18 +136,55 @@ export default class CalenderSelect extends React.Component {
     })
   }
 
+
+  renderEventContent = eventInfo => {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
+  }
+
+  renderSidebarEvent = event => {
+    console.log(formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }))
+    return (
+      <b>{formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })}</b>
+    )
+  }
+
+  render() {
+    console.log(this.props.error)
+    return (
+      <div className='demo-app'>
+        {this.renderSidebar()}
+        <div className='demo-app-main'>
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={false}
+            initialView='timeGrid'
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            // visibleRange={calendarEvents[0].start, calendarEvents[6].start}
+            visibleRange={this.getVisibleRange()}
+            // weekends={this.state.weekendsVisible}
+            initialEvents={calendarEvents}
+            // select={this.handleDateSelect}
+            eventContent={this.renderEventContent} // custom render function
+            eventClick={this.handleEventClick}
+            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+          /* you can update a remote database when these fire:
+          eventAdd={function(){}}
+          eventChange={function(){}}
+          eventRemove={function(){}}
+          */
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
-function renderSidebarEvent(event) {
-  return (
-      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })}</b>
-  )
-}
+export default CalendarSelect;

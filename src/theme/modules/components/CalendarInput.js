@@ -30,13 +30,6 @@ function CalendarInput(props) {
     console.log(value)
   }
 
-  const validateEmail = (emailTest) => {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailTest)) {
-      return (true)
-    }
-    return (false)
-  }
-
   const updateValueArr = () => {
     const arr = props.valueArr;
     arr[props.index] = value;
@@ -44,12 +37,15 @@ function CalendarInput(props) {
   }
 
   const handleNext = () => {
-    if (value) {
+    console.log(value)
+    if (value.length > 2) {
       setError(false);
       setErrorMessage("");
       updateValueArr();
       props.setShow(props.show + 1)
     } else {
+      console.log(`error run`)
+      console.log(questionErrorMessage)
       setError(true);
       setErrorMessage(questionErrorMessage)
     }
