@@ -1,38 +1,55 @@
-const getNewDate = (date, dayChange, dateNum) => {
-  date = new Date();
+const getNewDate = (dayChange, dateName, hourNum) => {
+  var date = new Date();
   date.setDate(date.getDate() + dayChange)
-  return {title: `day${dateNum}`, start: date}
+  date.setHours(hourNum, 0, 0, 0);
+  return { title: `${dateName}`, start: date }
 }
 
 const buildDateArr = () => {
-  const curDate = new Date();
-  let firstDate = getNewDate(curDate, 3, 1)
-  let dateArr = [firstDate]
-  for (let i = 0; i < 6; i++) {
-    let dateNum = i + 1
-    let dayIncrement = (parseInt(i) + 4)
-    dateArr.push(getNewDate(dateArr[dateNum], dayIncrement, (dateNum + 1)));
+  let dateArr = [];
+  // day 1 builder
+  for (let i = 3; i < 8; i++) {
+    for (let v = 1; v < 17; v++) {
+      var hourNum = parseInt(v + 7)
+      console.log(hourNum)
+      var dateName = `${i}-${hourNum}`
+      console.log(JSON.stringify(getNewDate(i, dateName, hourNum)))
+      dateArr.push(getNewDate(i, dateName, hourNum))
+    }
   }
   console.log(dateArr)
   return dateArr
 }
 
-const changeTime = (date) => {
-  date.setHours(8,0,0,0);
+// const buildDateArr = () => {
+//   const curDate = new Date();
+//   let firstDate = getNewDate(curDate, 3, 1)
+//   let dateArr = [firstDate]
+//   for (let i = 0; i < 6; i++) {
+//     let dateNum = i + 1
+//     let dayIncrement = (parseInt(i) + 4)
+//     dateArr.push(getNewDate(dateArr[dateNum], dayIncrement, (dateNum + 1)));
+//   }
+//   console.log(dateArr)
+//   return dateArr
+// }
+
+const changeTime = (date, hourNum) => {
+  console.log(date.setHours(hourNum, 0, 0, 0));
 }
 
-const finalizeDateArr = () => {
-  const dateArr = buildDateArr();
-  for (let i = 0; i < dateArr.length; i++) {
-    dateArr[i].start.setHours(8,0,0,0)
-  }
-  return dateArr
-}
+// const finalizeDateArr = () => {
+//   const dateArr = buildDateArr();
+//   for (let i = 0; i < dateArr.length; i++) {
+//     dateArr[i].start.setHours(8, 0, 0, 0)
+//   }
+//   return dateArr
+// }
 
 
 const curDate = new Date()
 
-const calendarEvents = finalizeDateArr();
+const calendarEvents = buildDateArr();
 // [
 //   {
 //     title: 'event1',

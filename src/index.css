@@ -48,10 +48,16 @@ code {
 .availability-error-msg {
   color: red;
 }
+.fc-toolbar-title {
+  font-size: 1em;
+}
 
 @media only screen and (max-width: 600px) {
   .main-title {
     font-size: 3rem;
     /* letter-spacing: 5px; */
+  }
+  .fc .fc-toolbar-title {
+    font-size: 1em;
   }
 }

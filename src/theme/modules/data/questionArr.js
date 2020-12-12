@@ -13,7 +13,7 @@ const questionArr = [
   },
   {
     questionName: 'availability',
-    questionText: 'When are you available for a study session?',
+    questionText: 'When are you available for your first study session? Please select three time slots.',
     questionErrorMessage: 'Please select three time slots',
     questionType: 'calendar'
   },

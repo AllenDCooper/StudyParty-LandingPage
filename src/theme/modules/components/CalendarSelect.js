@@ -4,24 +4,52 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import calendarEvents from '../data/calendarEvents';
+import './CalendarSelect.css'
 // import { INITIAL_EVENTS, createEventId } from './event-utils'
 
 class CalendarSelect extends React.Component {
 
   state = {
     // weekendsVisible: true,
-    eventsClickedArr: []
+    eventsClickedArr: [],
+    dateRange: {}
+  }
+
+  // componentDidMount() {
+  //   FullCalendar.setOption('visibleRange',
+  //     this.getVisibleRange()
+  //   )
+  // }
+
+  componentDidMount() {
+    console.log('componenet mounted')
+    this.getVisibleRange();
   }
 
   getVisibleRange = () => {
     const startDate = calendarEvents[0].start;
-    const endDate = calendarEvents[6].start;
-    return ({
-      start: startDate,
-      end: endDate
-    })
+    const mobileEndDate = calendarEvents[15].start
+    const normalEndDate = calendarEvents[79].start;
+    console.log(startDate)
+    if (window.innerWidth <= 740) {
+      console.log('mobile run');
+      console.log(`startDate: ${startDate}`)
+      console.log(`endDate: ${mobileEndDate}`)
+      this.setState({
+        dateRange: {
+          start: startDate,
+          end: mobileEndDate
+        }
+      }, () => console.log(this.state.dateRange))
+    } else {
+      this.setState({
+        dateRange: {
+          start: startDate,
+          end: normalEndDate
+        }
+      }, () => console.log(this.state.dateRange))
+    }
   }
-
 
   renderSidebar() {
     return (
@@ -136,39 +164,67 @@ class CalendarSelect extends React.Component {
     })
   }
 
+  handleRangeChange = (num) => {
+    console.log(num)
+    this.setState(state => {
+      const dateRange = state.dateRange
+      var startDate = dateRange.start
+      startDate.setDate(startDate.getDate() + num)
+      var endDate = dateRange.end
+      endDate.setDate(endDate.getDate() + num)
+      console.log(startDate)
+      console.log(endDate)
+      dateRange.start = startDate
+      dateRange.end = endDate
+      return {
+        dateRange
+      }
+    }, () => {console.log(this.state.dateRange)})
+  }
 
   renderEventContent = eventInfo => {
     return (
       <>
         <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
+        {/* <i>{eventInfo.event.title}</i> */}
       </>
     )
   }
 
   renderSidebarEvent = event => {
-    console.log(formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }))
+    console.log(formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: 'local' }))
     return (
-      <b>{formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })}</b>
+      <b>{formatDate(event, { year: 'numeric', month: 'short', day: 'numeric', timeZoneName: 'short', timeZone: 'local' })}</b>
     )
   }
 
   render() {
-    console.log(this.props.error)
     return (
       <div className='demo-app'>
         {this.renderSidebar()}
         <div className='demo-app-main'>
+          {this.state.dateRange ? 
           <FullCalendar
+            timeZone='local'
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={false}
+            headerToolbar={window.innerWidth <= 740 ? { start: 'title', center: false, end: 'backButton,nextButton' } : { start: 'title', center: false, end: false }}
             initialView='timeGrid'
             editable={true}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
+            customButtons={{
+              nextButton: {
+                text: <span>&gt;</span>,
+                click: () => this.handleRangeChange(1)
+              },
+              backButton: {
+                text: <span>&lt;</span>,
+                click: () => this.handleRangeChange(-1)
+              }}
+            }
             // visibleRange={calendarEvents[0].start, calendarEvents[6].start}
-            visibleRange={this.getVisibleRange()}
+            visibleRange={this.state.dateRange}
             // weekends={this.state.weekendsVisible}
             initialEvents={calendarEvents}
             // select={this.handleDateSelect}
@@ -176,11 +232,13 @@ class CalendarSelect extends React.Component {
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
           /* you can update a remote database when these fire:
-          eventAdd={function(){}}
-          eventChange={function(){}}
-          eventRemove={function(){}}
+          eventAdd={function () { }}
+          eventChange={function () { }}
+          eventRemove={function () { }}
           */
           />
+          :
+          null}
         </div>
       </div>
     )
