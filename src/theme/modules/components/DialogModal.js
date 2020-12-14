@@ -154,7 +154,7 @@ function DialogModal(props) {
         aria-labelledby="form-dialog-title"
         fullWidth={true}
         maxWidth={'sm'}
-        transitionDuration={400}
+        // transitionDuration={400}
       >
         {!responseRecieved ?
           <DialogContentText
