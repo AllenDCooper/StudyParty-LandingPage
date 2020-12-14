@@ -1,6 +1,6 @@
 {
   "name": "studyparty-landingpage",
-  "homepage": "https://mystudyparty.com",
+  "homepage": "https://mystudyparty.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
