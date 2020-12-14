@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Video from '../components/Video';
+import BannerImg from '../components/BannerImg.js';
 
 const styles = (theme) => ({
   root: {
@@ -55,7 +56,10 @@ function ProductHeroLayout(props) {
 
   return (
     <section className={classes.root}>
-      <Video />
+      {window.innerWidth <= 740 ? 
+      <BannerImg/>
+      : 
+      <Video />}
       <Container className={classes.container}>
         {/* <img
           src="/static/themes/onepirate/productHeroWonder.png"

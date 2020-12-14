@@ -17,7 +17,7 @@ function Index() {
 
   return (
     <React.Fragment>
-      {/* <AppAppBar /> */}
+      {window.innerWidth <= 740 ? <AppAppBar /> : null}
       <ProductHero show={show} setShow={setShow} />
       <ProductValues />
       {/* <ProductCategories />

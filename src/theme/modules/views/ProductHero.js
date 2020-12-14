@@ -39,6 +39,9 @@ const styles = (theme) => ({
   }
 });
 
+const desktopHeaderStyle = { textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '90px' }
+const mobileHeaderStyle = { textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '110px', marginBottom: '30px' }
+
 function ProductHero(props) {
   console.log(props)
   const { classes } = props;
@@ -57,18 +60,22 @@ function ProductHero(props) {
       <ProductHeroLayout id={'top'} backgroundClassName={classes.background} style={{ background: 'none' }}>
         {/* {helperFunction(props.show)} */}
         <>
-          <Link
-            className="permanent-marker pink"
-            underline="none"
-            color="inherit"
-            className={classes.title}
-            href={process.env.PUBLIC_URL}
-            style={{ fontFamily: "Permanent Marker", color: "hotpink", fontSize: "48px", textAlign: 'right' }}
-          >
-            {'StudyParty!'}
-          </Link>
+          {window.innerWidth <= 740 ?
+            null
+            :
+            <Link
+              className="permanent-marker pink"
+              underline="none"
+              color="inherit"
+              className={classes.title}
+              href={process.env.PUBLIC_URL}
+              style={{ fontFamily: "Permanent Marker", color: "hotpink", fontSize: "48px", textAlign: 'right' }}
+            >
+              {'StudyParty!'}
+            </Link>
+          }
           <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-          <Typography color="inherit" align="center" variant="h2" marked="center" style={{ textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '90px' }}>
+          <Typography color="inherit" align="center" variant="h2" marked="center" style={window.innerWidth <= 740 ? mobileHeaderStyle : desktopHeaderStyle}>
             Better Scores, <br></br>More Fun
             </Typography>
           {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
