@@ -7,7 +7,7 @@ const getNewDate = (dayChange, dateName, hourNum) => {
 
 const buildDateArr = () => {
   let dateArr = [];
-  for (let i = 3; i < 8; i++) {
+  for (let i = 1; i < 6; i++) {
     for (let v = 1; v < 17; v++) {
       var hourNum = parseInt(v + 7)
       console.log(hourNum)
