@@ -82,7 +82,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               <img
                 className={classes.image}
-                src={`${process.env.PUBLIC_URL}/images/Icon2.png`}
+                src={`${process.env.PUBLIC_URL}/images/Icon2.PNG`}
                 alt="graph"
               />
               <Typography variant="h6" className={classes.title}>
