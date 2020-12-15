@@ -50,29 +50,47 @@ function DialogModal(props) {
 
     const timeZoneDif = (new Date().getTimezoneOffset())
 
-    const availabilityOne = availability[0].timeClicked.start
-    availabilityOne.setMinutes(availabilityOne.getMinutes() + timeZoneDif - (5 * 60))
-    console.log(availabilityOne);
+    const formattedTimeArr = []
 
-    const availabilityTwo = availability[1].timeClicked.start
-    availabilityTwo.setMinutes(availabilityTwo.getMinutes() + timeZoneDif - (5 * 60))
-    console.log(availabilityTwo);
+    const formatAvailabilityTimesArr = (arr) => {
+      arr.forEach((timeEntry, index) => {
+        formattedTimeArr[index] = timeEntry.timeClicked.start
+        formattedTimeArr[index].setMinutes(formattedTimeArr[index].getMinutes() + timeZoneDif - (5 * 60))
+        formattedTimeArr[index] = formattedTimeArr[index].toUTCString()
+        console.log(formattedTimeArr[index]);
 
-    const availabilityThree = availability[2].timeClicked.start
-    availabilityThree.setMinutes(availabilityThree.getMinutes() + timeZoneDif - (5 * 60))
-    console.log(availabilityThree);
+      })
+      return JSON.stringify(formattedTimeArr)
+    }
+    // const availabilityOne = availability[0].timeClicked.start
+    // availabilityOne.setMinutes(availabilityOne.getMinutes() + timeZoneDif - (5 * 60))
+    // console.log(availabilityOne);
+
+    // const availabilityTwo = availability[1].timeClicked.start
+    // availabilityTwo.setMinutes(availabilityTwo.getMinutes() + timeZoneDif - (5 * 60))
+    // console.log(availabilityTwo);
+
+    // const availabilityThree = availability[2].timeClicked.start
+    // availabilityThree.setMinutes(availabilityThree.getMinutes() + timeZoneDif - (5 * 60))
+    // console.log(availabilityThree);
+
+    const submissionDateTime = new Date()
+    submissionDateTime.setMinutes(submissionDateTime.getMinutes() - (5 * 60))
+    console.log(submissionDateTime)
 
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
+        submitted: submissionDateTime.toUTCString(),
         email: nameAndEmail.email,
         name: nameAndEmail.name,
         // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
-        availabilityOne: availabilityOne.toUTCString(),
-        availabilityTwo: availabilityTwo.toUTCString(),
-        availabilityThree: availabilityThree.toUTCString(),
+        availability: formatAvailabilityTimesArr(availability),
+        // availabilityOne: availabilityOne.toUTCString(),
+        // availabilityTwo: availabilityTwo.toUTCString(),
+        // availabilityThree: availabilityThree.toUTCString(),
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
@@ -168,7 +186,7 @@ function DialogModal(props) {
         aria-labelledby="form-dialog-title"
         fullWidth={true}
         maxWidth={'sm'}
-        // transitionDuration={400}
+      // transitionDuration={400}
       >
         {!responseRecieved ?
           <DialogContentText

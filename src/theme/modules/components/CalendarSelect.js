@@ -74,7 +74,9 @@ class CalendarSelect extends React.Component {
       if (matchFound) {
         eventsClickedArr.splice(matchIndex, 1)
         clickInfo.el.style.backgroundColor = 'rgb(55, 136, 216)'
-      } else if (matchFound === false && eventsClickedArr.length < 3) {
+      } else if (matchFound === false
+        // && eventsClickedArr.length < 3
+        ) {
         clickInfo.el.style.backgroundColor = 'green'
         let dateObj = { eventId: eventId, timeClicked: timeClicked }
         eventsClickedArr.push(dateObj)

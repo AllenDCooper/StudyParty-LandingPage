@@ -41,7 +41,7 @@ const questionArr = [
   },
   {
     questionName: 'availability',
-    questionText: 'When are you available for your first study session? Please select three time slots.',
+    questionText: 'When are you available for your first study session? Please select at least three time slots.',
     questionErrorMessage: 'Please select three time slots',
     questionType: 'calendar'
   },
