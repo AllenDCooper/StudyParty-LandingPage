@@ -14,7 +14,7 @@ const questionArr = [
   {
     questionName: 'studyGroup',
     questionText: 'Are you looking for a study partner or group?',
-    answerOptionsArr: ['Partner', 'Group'],
+    answerOptionsArr: ['Partner', 'Group', 'Not sure'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
   },
