@@ -46,13 +46,13 @@ function DialogModal(props) {
     props.setShow(props.show + 1);
     console.log(props.show)
     console.log(valueArr)
-    const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
+    const [testDate, groupSize, testPrep, targetScore, targetSection, availability, nameAndEmail] = valueArr
     console.log(availability)
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
-        email: email,
-        name: name,
+        email: nameAndEmail.email,
+        name: nameAndEmail.name,
         // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
@@ -120,7 +120,7 @@ function DialogModal(props) {
                 handleSubmit={handleSubmit}
                 handleClose={handleClose} />
               :
-              item.questionType === 'shortAnswer' ?
+              item.questionType === 'multipleShortAnswer' ?
                 <ShortAnswerInput
                   questionObj={item}
                   valueArr={valueArr}

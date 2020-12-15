@@ -46,16 +46,10 @@ const questionArr = [
     questionType: 'calendar'
   },
   {
-    questionName: 'name',
-    questionText: 'Please provide your name:',
-    questionErrorMessage: 'Please enter your name',
-    questionType: 'shortAnswer'
-  },
-  {
-    questionName: 'email',
-    questionText: 'Please provide your email address:',
-    questionErrorMessage: 'Please enter a valid email address',
-    questionType: 'emailInput'
+    questionName: ['name', 'email'],
+    questionText: ['Please provide your name and email address'],
+    questionErrorMessage: ['Please enter your name', 'Please enter a valid email address'],
+    questionType: 'multipleShortAnswer'
   },
 ]
 

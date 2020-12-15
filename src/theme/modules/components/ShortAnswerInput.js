@@ -15,52 +15,81 @@ function ShortAnswerInput(props) {
   const { classes } = props;
 
   // destructure question object from props
-  const { questionName, questionText, questionErrorMessage } = props.questionObj;
+  const { questionName, questionText } = props.questionObj;
+  const questionErrorMessage1 = props.questionObj.questionErrorMessage[0];
+  const questionErrorMessage2 = props.questionObj.questionErrorMessage[1]
 
   const questionNum = props.index + 1;
 
   // hooks
-  const [value, setValue] = useState(null);
+  const [nameValue, setNameValue] = useState(null);
+  const [emailValue, setEmailValue] = useState(null);
   const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
-    setValue(event.target.value)
-    console.log(value)
+    console.log(event.target.name)
+    if (event.target.name === 'name') {
+      setNameValue(event.target.value)
+    }
+    else {
+      setEmailValue(event.target.value)
+    }
+  }
+
+  const validateEmail = (emailTest) => {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailTest)) {
+      return (true)
+    }
+    return (false)
   }
 
   const updateValueArr = () => {
     const arr = props.valueArr;
-    arr[props.index] = value;
+    const nameAndEmail = { name: nameValue, email: emailValue }
+    arr[props.index] = nameAndEmail;
     props.setValueArr(arr);
   }
 
   const checkSubmit = () => {
-    if (value) {
+    if (nameValue && validateEmail(emailValue)) {
       setError(false);
       setErrorMessage("");
       updateValueArr();
-      props.handleSubmit()
+      props.handleSubmit();
+    } else if (!nameValue && validateEmail(emailValue)) {
+      setError(true);
+      setErrorMessage(questionErrorMessage1);
+    } else if (nameValue && !validateEmail(emailValue)) {
+      setError(true);
+      setErrorMessage(questionErrorMessage2);
     } else {
       setError(true);
-      setErrorMessage(questionErrorMessage)
+      setErrorMessage(`${questionErrorMessage1}. ${questionErrorMessage2}`)
     }
   }
 
   const handleNext = () => {
-    if (value) {
+    if (nameValue && validateEmail(emailValue)) {
       setError(false);
       setErrorMessage("");
       updateValueArr();
       props.setShow(props.show + 1)
+    } else if (!nameValue && validateEmail(emailValue)) {
+      setError(true);
+      setErrorMessage(questionErrorMessage1);
+    } else if (nameValue && !validateEmail(emailValue)) {
+      setError(true);
+      setErrorMessage(questionErrorMessage2);
     } else {
       setError(true);
-      setErrorMessage(questionErrorMessage)
+      setErrorMessage(`${questionErrorMessage1}. ${questionErrorMessage2}`)
     }
   }
 
   const handleBack = () => {
-    setValue("");
+    setNameValue("");
+    setEmailValue("");
     setError(false);
     setErrorMessage("");
     props.setShow(props.show - 1)
@@ -82,13 +111,24 @@ function ShortAnswerInput(props) {
             {questionText}
           </DialogContentText>
           <TextField
+            style={{ width: '100%', color: 'black', margin: '0 auto 20px auto' }}
+            type="text"
+            id={questionName[0]}
+            name={questionName[0]}
+            label={questionName[0]}
+            variant="outlined"
+            value={nameValue}
+            onChange={handleChange}
+            error={errorMessage}
+          />
+          <TextField
             style={{ width: '100%', color: 'black', margin: '0 auto' }}
             type="text"
-            id={questionName}
-            name={questionName}
-            label={questionName}
+            id={questionName[1]}
+            name={questionName[1]}
+            label={questionName[1]}
             variant="outlined"
-            value={value}
+            value={emailValue}
             onChange={handleChange}
             error={errorMessage}
           />
