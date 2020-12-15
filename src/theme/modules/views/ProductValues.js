@@ -74,7 +74,7 @@ function ProductValues(props) {
                 Find a study partner or group
               </Typography>
               <Typography variant="h5">
-                {'Match based on personalities and skills.'}
+                {'Get matched based on goals and skills.'}
               </Typography>
             </div>
           </Grid>
