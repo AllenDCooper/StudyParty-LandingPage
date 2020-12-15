@@ -12,12 +12,6 @@ const questionArr = [
     questionType: 'dateSelect'
   },
   {
-    questionName: 'availability',
-    questionText: 'When are you available for your first study session? Please select three time slots.',
-    questionErrorMessage: 'Please select three time slots',
-    questionType: 'calendar'
-  },
-  {
     questionName: 'studyGroup',
     questionText: 'Are you looking for a study partner or group?',
     answerOptionsArr: ['Partner', 'Group'],
@@ -44,6 +38,12 @@ const questionArr = [
     answerOptionsArr: ['Quantitative', 'Verbal', 'Both'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
+  },
+  {
+    questionName: 'availability',
+    questionText: 'When are you available for your first study session? Please select three time slots.',
+    questionErrorMessage: 'Please select three time slots',
+    questionType: 'calendar'
   },
   {
     questionName: 'name',
