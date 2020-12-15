@@ -25,7 +25,8 @@ const CalendarView = (props) => {
 
   return (
     <div className='demo-app' style={props.calendarNum === (props.index + 1) ? { display: 'inherit' } : { display: 'none' }}>
-      {props.error ? props.error : null}
+      <div style={{marginBottom: '20px'}}>{`All times are ${new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1]}`}</div>
+      <div>{props.error ? props.error : null}</div>
       <div className='demo-app-main'>
         <FullCalendar
           contentHeight={600}

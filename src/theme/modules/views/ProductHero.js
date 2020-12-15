@@ -40,7 +40,10 @@ const styles = (theme) => ({
 });
 
 const desktopHeaderStyle = { textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '90px' }
-const mobileHeaderStyle = { visibility: 'hidden', textTransform: "none", fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '50px', marginBottom: '30px' }
+const mobileHeaderStyle = { textTransform: "none", fontSize: '30px', fontFamily: 'PT Sans, sans-serif', fontWeight: '700', marginTop: '300px', marginBottom: '0px' }
+
+const desktopDescriptionStyle = { fontWeight: '400', fontSize: '18px', lineHeight: '24px', margin: '50px 15px', maxWidth: '500px', fontFamily: 'Lato, sans-serif' }
+const mobileDescriptionStyle = { fontWeight: '400', fontSize: '18px', lineHeight: '24px', margin: '20px 15px', maxWidth: '500px', fontFamily: 'Lato, sans-serif' }
 
 function ProductHero(props) {
   console.log(props)
@@ -76,11 +79,11 @@ function ProductHero(props) {
           }
           <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
           <Typography color="inherit" align="center" variant="h2" marked="center" style={window.innerWidth <= 740 ? mobileHeaderStyle : desktopHeaderStyle}>
-            A New Way to Study<br></br>for the GMAT
+            A new way to study<br></br>for the GMAT
             {/* Better Scores, <br></br>More Fun */}
           </Typography>
           {/* <span style={{ width: "100px", borderBottom: "4px solid white" }}></span> */}
-          <Typography color="inherit" align="center" variant="h5" className={classes.h5} style={{ fontWeight: '400', fontSize: '18px', lineHeight: '24px', margin: '50px 15px', maxWidth: '500px', fontFamily: 'Lato, sans-serif' }}>
+          <Typography color="inherit" align="center" variant="h5" className={classes.h5} style={window.innerWidth <= 740 ? mobileDescriptionStyle : desktopDescriptionStyle} >
             StudyParty connects virtual study partners and groups using smart technology. Improve your score while meeting future business school classmates. Free and fun to use.
             </Typography>
           <Button

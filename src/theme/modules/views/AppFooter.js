@@ -126,9 +126,9 @@ export default function AppFooter(props) {
           <Grid item xs={12} md={12} >
           </Grid>
           <Grid item xs={12} md={12} style={{padding: '0px'}}>
-            <Typography variant="h6" marked="center" gutterBottom>
+            {/* <Typography variant="h6" marked="center" gutterBottom>
               Contact
-            </Typography>
+            </Typography> */}
             <Link href='mailto:info@mystudyparty.com'>
               Contact Us
             </Link>

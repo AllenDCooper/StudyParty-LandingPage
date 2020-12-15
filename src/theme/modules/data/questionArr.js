@@ -28,7 +28,7 @@ const questionArr = [
   {
     questionName: 'targetScore',
     questionText: 'What is your target score?',
-    answerOptionsArr: ['At least 60th percentile (~550 and up)', 'At least 70th percentile (~600 and up)', 'At least 80th percentile (~650 and up)', 'At least 90th percentile (~700 and up)'],
+    answerOptionsArr: ['At least 60th percentile (~550 and up)', 'At least 70th percentile (~600 and up)', 'At least 80th percentile (~650 and up)', 'At least 90th percentile (~700 and up)', 'Not sure'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
   },
