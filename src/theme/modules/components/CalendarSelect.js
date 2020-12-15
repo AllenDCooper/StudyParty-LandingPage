@@ -58,6 +58,7 @@ class CalendarSelect extends React.Component {
 
     const eventId = clickInfo.event._instance.instanceId
     const timeClicked = clickInfo.event._instance.range
+    console.log(`timeClicked: ${JSON.stringify(timeClicked)}`);
     this.props.onChange(timeClicked);
 
     this.setState(prevState => {

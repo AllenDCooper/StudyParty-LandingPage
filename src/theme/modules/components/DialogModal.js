@@ -47,7 +47,21 @@ function DialogModal(props) {
     console.log(props.show)
     console.log(valueArr)
     const [testDate, groupSize, testPrep, targetScore, targetSection, availability, nameAndEmail] = valueArr
-    console.log(availability)
+
+    const timeZoneDif = (new Date().getTimezoneOffset())
+
+    const availabilityOne = availability[0].timeClicked.start
+    availabilityOne.setMinutes(availabilityOne.getMinutes() + timeZoneDif - (5 * 60))
+    console.log(availabilityOne);
+
+    const availabilityTwo = availability[1].timeClicked.start
+    availabilityTwo.setMinutes(availabilityTwo.getMinutes() + timeZoneDif - (5 * 60))
+    console.log(availabilityTwo);
+
+    const availabilityThree = availability[2].timeClicked.start
+    availabilityThree.setMinutes(availabilityThree.getMinutes() + timeZoneDif - (5 * 60))
+    console.log(availabilityThree);
+
     const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
     axios.get(url, {
       params: {
@@ -56,9 +70,9 @@ function DialogModal(props) {
         // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
-        availabilityOne: availability[0].timeClicked.start,
-        availabilityTwo: availability[1].timeClicked.start,
-        availabilityThree: availability[2].timeClicked.start,
+        availabilityOne: availabilityOne.toUTCString(),
+        availabilityTwo: availabilityTwo.toUTCString(),
+        availabilityThree: availabilityThree.toUTCString(),
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
