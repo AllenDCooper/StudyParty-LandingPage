@@ -51,11 +51,11 @@ function ProductValues(props) {
   return (
     <section className={classes.root} onClick={props.clickBack}>
       <Container className={classes.container}>
-        <img
+        {/* <img
           src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
-        />
+        /> */}
         <div>
         <Grid container spacing={5}>
         <Grid item xs={12}>
