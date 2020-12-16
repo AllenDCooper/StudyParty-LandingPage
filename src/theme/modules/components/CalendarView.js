@@ -29,7 +29,7 @@ const CalendarView = (props) => {
       <div>{props.error ? props.error : null}</div>
       <div className='demo-app-main'>
         <FullCalendar
-          contentHeight={600}
+          contentHeight={800}
           timeZone='local'
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={renderButtons(props.calendarNum)}
@@ -37,7 +37,9 @@ const CalendarView = (props) => {
           editable={false}
           selectable={false}
           selectMirror={true}
-          dayMaxEvents={true}
+          // dayMaxEvents={true}
+          allDaySlot={false}
+          allDayMaintainDuration={true}
           // slotMinTime={'06:00:00'}
           // slotMaxTime={'24:00:00'}
           customButtons={{

@@ -54,7 +54,15 @@ class CalendarSelect extends React.Component {
     element.style.backgroundColor === 'green' ? element.style.backgroundColor = '#3788d8' : element.style.backgroundColor = 'green'
   }
 
+  moveToInWindow = (x, y) => {
+    console.log(`moveToInWindow run`);
+    window.moveTo(x, y);
+  }
+
   handleEventClick = (clickInfo) => {
+    clickInfo.jsEvent.preventDefault()
+    console.log(clickInfo.view.type)
+    console.log(clickInfo.jsEvent.pageY)
 
     const eventId = clickInfo.event._instance.instanceId
     const timeClicked = clickInfo.event._instance.range
@@ -85,7 +93,10 @@ class CalendarSelect extends React.Component {
         eventsClickedArr
       }
     },
-      () => { this.props.onChange(this.state.eventsClickedArr) }
+      () => {
+        this.props.onChange(this.state.eventsClickedArr);
+        this.moveToInWindow(clickInfo.jsEvent.pageX, clickInfo.jsEvent.pageY);
+      }
     )
   }
 
