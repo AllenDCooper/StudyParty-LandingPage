@@ -11,7 +11,7 @@ const styles = (theme) => ({
 });
 
 function EmailInput(props) {
-  console.log(props)
+  // console.log(props)
   const { classes } = props;
 
   // destructure question object from props
@@ -26,7 +26,7 @@ function EmailInput(props) {
 
   const handleChange = (event) => {
     setValue(event.target.value)
-    console.log(value)
+    // console.log(value)
   }
 
   const validateEmail = (emailTest) => {
@@ -37,9 +37,9 @@ function EmailInput(props) {
   }
 
   const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    props.setValueArr(arr);
+    const obj = {...props.valueArr};
+    obj[questionName] = value
+    props.setValueArr(obj);
   }
 
   const handleNext = () => {

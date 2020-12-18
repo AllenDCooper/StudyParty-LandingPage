@@ -33,9 +33,9 @@ function DateInput(props) {
   };
 
   const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    props.setValueArr(arr);
+    const obj = {...props.valueArr};
+    obj[questionName] = value
+    props.setValueArr(obj);
   }
 
   const handleNext = () => {

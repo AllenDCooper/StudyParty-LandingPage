@@ -12,7 +12,7 @@ const styles = (theme) => ({
 });
 
 function CalendarInput(props) {
-  console.log(props)
+  // console.log(props)
   const { classes } = props;
 
   // destructure question object from props
@@ -31,9 +31,9 @@ function CalendarInput(props) {
   }
 
   const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    props.setValueArr(arr);
+    const obj = {...props.valueArr};
+    obj[questionName] = value
+    props.setValueArr(obj);
   }
 
   const handleNext = () => {

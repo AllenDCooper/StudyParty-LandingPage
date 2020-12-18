@@ -21,19 +21,20 @@ const styles = (theme) => ({
 
 function DialogModal(props) {
 
-  console.log(questionArr);
+  // console.log(questionArr); 
   const { classes } = props;
 
-  // Instantiates an array to capture answers and to be stored in state
-  const initialValueArr = questionArr.map((item) => {
-    const name = item.name;
-    const newObj = {}
-    newObj[name] = null
-    return newObj
-  })
-
   // Hooks
-  const [valueArr, setValueArr] = useState(initialValueArr);
+  const [valueArr, setValueArr] = useState({
+    testDate: null,
+    availability: null,
+    studyGroup: null,
+    testPrep: null,
+    targetScore: null,
+    targetSection: null,
+    email: null,
+    name: null,
+  });
   const [responseRecieved, setResponseRecieved] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
@@ -41,43 +42,58 @@ function DialogModal(props) {
     props.setShow(0);
   };
 
-  // Sends data to populate Google Sheet
-  const sendToGoogleForms = () => {
-    props.setShow(props.show + 1);
-    console.log(props.show)
-    console.log(valueArr)
-    const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
-    console.log(availability)
-    const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
-    axios.get(url, {
-      params: {
-        email: email,
-        name: name,
-        // testType: testType,
-        testDateMonth: testDate.getMonth() + 1,
-        testDateYear: testDate.getFullYear(),
-        availabilityOne: availability[0].timeClicked.start,
-        availabilityTwo: availability[1].timeClicked.start,
-        availabilityThree: availability[2].timeClicked.start,
-        testPrep: testPrep,
-        groupSize: groupSize,
-        targetScore: targetScore,
-        targetSection: targetSection
-      }
-    })
-      .then(function (response) {
-        setResponseRecieved(true);
-        console.log("submitted");
-        console.log(response)
-      })
-      .catch(function (error) {
-        setSubmitError(true);
-        console.log(error)
-      })
+  // // Sends data to populate Google Sheet
+  // const sendToGoogleForms = () => {
+  //   props.setShow(props.show + 1);
+  //   console.log(props.show)
+  //   console.log(valueArr)
+  //   const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
+  //   console.log(availability)
+  //   const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
+  //   axios.get(url, {
+  //     params: {
+  //       email: email,
+  //       name: name,
+  //       // testType: testType,
+  //       testDateMonth: testDate.getMonth() + 1,
+  //       testDateYear: testDate.getFullYear(),
+  //       availabilityOne: availability[0].timeClicked.start,
+  //       availabilityTwo: availability[1].timeClicked.start,
+  //       availabilityThree: availability[2].timeClicked.start,
+  //       testPrep: testPrep,
+  //       groupSize: groupSize,
+  //       targetScore: targetScore,
+  //       targetSection: targetSection
+  //     }
+  //   })
+  //     .then(function (response) {
+  //       setResponseRecieved(true);
+  //       console.log("submitted");
+  //       console.log(response)
+  //     })
+  //     .catch(function (error) {
+  //       setSubmitError(true);
+  //       console.log(error)
+  //     })
+  // }
+
+  const sendToDB=()=>{
+    axios.post(process.env.REACT_APP_BACKEND_URL,{
+      ...valueArr
+    },
+    {
+      headers:{ 
+          'Access-Control-Allow-Origin': '*',
+        }
+    }
+    )
+    .then(data=>console.log(data))
+    .catch(e=>console.error(e))
   }
 
   const handleSubmit = () => {
-    sendToGoogleForms();
+    handleClose()
+    sendToDB()
   }
 
   return (
@@ -88,10 +104,10 @@ function DialogModal(props) {
           <Dropdown
             questionObj={item}
             valueArr={valueArr}
+            index={index}
             setValueArr={setValueArr}
             show={props.show}
             setShow={props.setShow}
-            index={index}
             questionArrLength={questionArr.length}
             handleSubmit={handleSubmit}
             handleClose={handleClose} />
