@@ -35,11 +35,33 @@ function DialogModal(props) {
   // Hooks
   const [valueArr, setValueArr] = useState(initialValueArr);
   const [responseRecieved, setResponseRecieved] = useState(false);
+  const [emailResponseReceived, setEmailResponseRecieved] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
   const handleClose = () => {
     props.setShow(0);
   };
+
+  const sendToServer = (emailInput, nameInput) => {
+    axios.post("https://studyparty-server.herokuapp.com/api/signup", {
+      email: emailInput, name: nameInput
+    },
+    {
+      headers:
+        { 'Access-Control-Allow-Origin': '*'}
+    }
+    )
+      .then(response => {
+        console.log("email sent")
+        console.log(response.data);
+        setEmailResponseRecieved(true);
+      })
+      .catch(error => {
+        console.log(error);
+        setEmailResponseRecieved(true);
+        submitError(true);
+      });
+  }
 
   // Sends data to populate Google Sheet
   const sendToGoogleForms = () => {
@@ -47,6 +69,9 @@ function DialogModal(props) {
     console.log(props.show)
     console.log(valueArr)
     const [testDate, groupSize, testPrep, targetScore, targetSection, availability, nameAndEmail] = valueArr
+
+    sendToServer(nameAndEmail.email, nameAndEmail.name)
+    setResponseRecieved(true);
 
     const timeZoneDif = (new Date().getTimezoneOffset())
 
@@ -62,17 +87,6 @@ function DialogModal(props) {
       })
       return JSON.stringify(formattedTimeArr)
     }
-    // const availabilityOne = availability[0].timeClicked.start
-    // availabilityOne.setMinutes(availabilityOne.getMinutes() + timeZoneDif - (5 * 60))
-    // console.log(availabilityOne);
-
-    // const availabilityTwo = availability[1].timeClicked.start
-    // availabilityTwo.setMinutes(availabilityTwo.getMinutes() + timeZoneDif - (5 * 60))
-    // console.log(availabilityTwo);
-
-    // const availabilityThree = availability[2].timeClicked.start
-    // availabilityThree.setMinutes(availabilityThree.getMinutes() + timeZoneDif - (5 * 60))
-    // console.log(availabilityThree);
 
     const submissionDateTime = new Date()
     submissionDateTime.setMinutes(submissionDateTime.getMinutes() - (5 * 60))
@@ -88,9 +102,6 @@ function DialogModal(props) {
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
         availability: formatAvailabilityTimesArr(availability),
-        // availabilityOne: availabilityOne.toUTCString(),
-        // availabilityTwo: availabilityTwo.toUTCString(),
-        // availabilityThree: availabilityThree.toUTCString(),
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
@@ -109,6 +120,7 @@ function DialogModal(props) {
   }
 
   const handleSubmit = () => {
+    setResponseRecieved(true);
     sendToGoogleForms();
   }
 
@@ -188,7 +200,7 @@ function DialogModal(props) {
         maxWidth={'sm'}
       // transitionDuration={400}
       >
-        {!responseRecieved ?
+        {!responseRecieved || !emailResponseReceived ?
           <DialogContentText
             style={{
               textAlign: 'center',
