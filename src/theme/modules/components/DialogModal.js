@@ -115,7 +115,10 @@ function DialogModal(props) {
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
-        targetSection: targetSection
+        targetSection: targetSection,
+        timeZone: availability[0].timeZone,
+        timeZoneLocation: availability[0].timeZoneLocation,
+        timeZoneOffset: availability[0].timeZoneOffset
       }
     })
       .then(function (response) {
