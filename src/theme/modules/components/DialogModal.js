@@ -42,14 +42,18 @@ function DialogModal(props) {
     props.setShow(0);
   };
 
-  const sendToServer = (emailInput, nameInput) => {
+  // send user name and email address to server to generate automated email
+  const sendToServer = (valueArr) => {
+    const [testDate, groupSize, testPrep, targetScore, targetSection, availability, nameAndEmail] = valueArr
     axios.post("https://studyparty-server.herokuapp.com/api/signup", {
-      email: emailInput, name: nameInput
+      email: nameAndEmail.email,
+      name: nameAndEmail.name,
+      availabilityArr: availability
     },
-    {
-      headers:
-        { 'Access-Control-Allow-Origin': '*'}
-    }
+      {
+        headers:
+          { 'Access-Control-Allow-Origin': '*' }
+      }
     )
       .then(response => {
         console.log("email sent")
@@ -59,33 +63,37 @@ function DialogModal(props) {
       .catch(error => {
         console.log(error);
         setEmailResponseRecieved(true);
-        submitError(true);
+        setSubmitError(true);
       });
   }
 
   // Sends data to populate Google Sheet
-  const sendToGoogleForms = () => {
-    props.setShow(props.show + 1);
-    console.log(props.show)
+  const sendToGoogleForms = (valueArr) => {
     console.log(valueArr)
+    props.setShow(props.show + 1);
     const [testDate, groupSize, testPrep, targetScore, targetSection, availability, nameAndEmail] = valueArr
 
-    sendToServer(nameAndEmail.email, nameAndEmail.name)
-    setResponseRecieved(true);
+    // const timeZoneDif = (new Date().getTimezoneOffset())
+    // const formattedTimeArr = []
+    // const formatAvailabilityTimesArr = (arr) => {
+    //   arr.forEach((timeEntry, index) => {
+    //     formattedTimeArr[index] = timeEntry.timeClicked.start
+    //     formattedTimeArr[index].setMinutes(formattedTimeArr[index].getMinutes() + timeZoneDif - (5 * 60))
+    //     formattedTimeArr[index] = formattedTimeArr[index].toUTCString()
+    //     console.log(formattedTimeArr[index]);
 
-    const timeZoneDif = (new Date().getTimezoneOffset())
-
-    const formattedTimeArr = []
-
-    const formatAvailabilityTimesArr = (arr) => {
-      arr.forEach((timeEntry, index) => {
-        formattedTimeArr[index] = timeEntry.timeClicked.start
-        formattedTimeArr[index].setMinutes(formattedTimeArr[index].getMinutes() + timeZoneDif - (5 * 60))
-        formattedTimeArr[index] = formattedTimeArr[index].toUTCString()
-        console.log(formattedTimeArr[index]);
-
+    //   })
+    //   return JSON.stringify(formattedTimeArr)
+    // }
+  
+    const sortArr = (availabilityArr, timeTypeStr) => {
+      // timeType must be "newYork", "local", or "time"
+      let sortedArr = []
+      availabilityArr.forEach((item, index) => {
+        let dateStr = item[timeTypeStr].start
+        sortedArr.push(dateStr)
       })
-      return JSON.stringify(formattedTimeArr)
+      return sortedArr
     }
 
     const submissionDateTime = new Date()
@@ -101,7 +109,9 @@ function DialogModal(props) {
         // testType: testType,
         testDateMonth: testDate.getMonth() + 1,
         testDateYear: testDate.getFullYear(),
-        availability: formatAvailabilityTimesArr(availability),
+        availabilityEST: JSON.stringify(sortArr(availability, "newYork")),
+        availabilityLocal: JSON.stringify(sortArr(availability, "local")),  
+        availabilityTime: JSON.stringify(sortArr(availability, "time")),
         testPrep: testPrep,
         groupSize: groupSize,
         targetScore: targetScore,
@@ -120,8 +130,9 @@ function DialogModal(props) {
   }
 
   const handleSubmit = () => {
-    setResponseRecieved(true);
-    sendToGoogleForms();
+    console.log(valueArr)
+    sendToServer(valueArr);
+    sendToGoogleForms(valueArr);
   }
 
   return (

@@ -11,7 +11,6 @@ const styles = (theme) => ({
 });
 
 function EmailInput(props) {
-  console.log(props)
   const { classes } = props;
 
   // destructure question object from props
