@@ -56,14 +56,13 @@ function ShortAnswerInput(props) {
     obj.name = nameValue;
     obj.email = emailValue;
     props.setValueObj(obj);
-    console.log('OBJ',obj)  
-    console.log('valOBJ',props.valueObj)  
   }
 
   const checkSubmit = () => {
     if (nameValue && validateEmail(emailValue)) {
       setError(false);
       setErrorMessage("");
+      props.setShow(props.show + 1)
       updateValueObj();
       props.handleSubmit();
     } else if (!nameValue && validateEmail(emailValue)) {

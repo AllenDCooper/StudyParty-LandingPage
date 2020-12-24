@@ -39,7 +39,7 @@ function DialogModal(props) {
     email: null,
     name: null,
   });
-  const [responseRecieved, setResponseRecieved] = useState(false);
+  // const [responseRecieved, setResponseRecieved] = useState(false);
   const [emailResponseReceived, setEmailResponseRecieved] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
@@ -59,9 +59,9 @@ function DialogModal(props) {
     )
       .then(response => {
         console.log("email sent")
-        console.log('Status',response.status);
-        console.log('Data',response.data);
-        setEmailResponseRecieved(true);
+        if(response.status===200){
+          setEmailResponseRecieved(true);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -71,7 +71,6 @@ function DialogModal(props) {
   }
 
   const handleSubmit = () => {
-    console.log(valueObj)
     sendToServer(valueObj);
   }
 
@@ -151,7 +150,7 @@ function DialogModal(props) {
         maxWidth={'sm'}
       // transitionDuration={400}
       >
-        {!responseRecieved || !emailResponseReceived ?
+        {!emailResponseReceived ?
           <DialogContentText
             style={{
               textAlign: 'center',
