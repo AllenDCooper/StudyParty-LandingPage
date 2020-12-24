@@ -51,11 +51,11 @@ function ProductValues(props) {
   return (
     <section className={classes.root} onClick={props.clickBack}>
       <Container className={classes.container}>
-        <img
+        {/* <img
           src="/images/productCurvyLines.png"
           className={classes.curvyLines}
           alt="curvy lines"
-        />
+        /> */}
         <div>
         <Grid container spacing={5}>
         <Grid item xs={12}>
@@ -74,7 +74,7 @@ function ProductValues(props) {
                 Find a study partner or group
               </Typography>
               <Typography variant="h5">
-                {'Match based on personalities and skills.'}
+                {'Get matched based on goals and skills.'}
               </Typography>
             </div>
           </Grid>

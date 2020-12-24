@@ -78,7 +78,7 @@ export default function AppFooter(props) {
   return (
     <Typography component="footer" className={classes.root} onClick={props.clickBack}>
       <Container className={classes.container}>
-        <Grid container spacing={5} justify='center'>
+        <Grid container spacing={5} justify='left'>
           {/* <Grid item xs={12} sm={8} md={4}>
             <Typography variant="h6" marked="center" gutterBottom>
               Social
@@ -123,7 +123,17 @@ export default function AppFooter(props) {
               ))}
             </TextField>
           </Grid> */}
-          <Grid item xs={6} sm={8} md={4}>
+          <Grid item xs={12} md={12} >
+          </Grid>
+          <Grid item xs={12} md={12} style={{padding: '0px'}}>
+            {/* <Typography variant="h6" marked="center" gutterBottom>
+              Contact
+            </Typography> */}
+            <Link href='mailto:info@mystudyparty.com'>
+              Contact Us
+            </Link>
+          </Grid>
+          <Grid item xs={12} md={12} >
             <Copyright />
           </Grid>
         </Grid>

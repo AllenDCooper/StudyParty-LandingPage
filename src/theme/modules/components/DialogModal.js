@@ -12,6 +12,7 @@ import ShortAnswerInput from './ShortAnswerInput';
 import CalendarInput from './CalendarInput';
 // import question data
 import questionArr from '../data/questionArr';
+import { DateTime } from 'luxon';
 
 const styles = (theme) => ({
   button: {
@@ -25,75 +26,53 @@ function DialogModal(props) {
   const { classes } = props;
 
   // Hooks
-  const [valueArr, setValueArr] = useState({
+  const [valueObj, setValueObj] = useState({
     testDate: null,
     availability: null,
     studyGroup: null,
     testPrep: null,
     targetScore: null,
     targetSection: null,
+    timeZone: new Date().toString().match(/\(([A-Za-z\s].*)\)/)[1],
+    timeZoneOffset:new Date().getTimezoneOffset(),
+    timeZoneLocation:DateTime.fromMillis(new Date().getTime()).zoneName,
     email: null,
     name: null,
   });
   const [responseRecieved, setResponseRecieved] = useState(false);
+  const [emailResponseReceived, setEmailResponseRecieved] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
   const handleClose = () => {
     props.setShow(0);
   };
 
-  // // Sends data to populate Google Sheet
-  // const sendToGoogleForms = () => {
-  //   props.setShow(props.show + 1);
-  //   console.log(props.show)
-  //   console.log(valueArr)
-  //   const [testDate, availability, groupSize, testPrep, targetScore, targetSection, email, name] = valueArr
-  //   console.log(availability)
-  //   const url = 'https://script.google.com/macros/s/AKfycbxSQuoJeJTkKolxST5eVJrBi3MrNUebPlZi6tGQzmll34dl1HE/exec'
-  //   axios.get(url, {
-  //     params: {
-  //       email: email,
-  //       name: name,
-  //       // testType: testType,
-  //       testDateMonth: testDate.getMonth() + 1,
-  //       testDateYear: testDate.getFullYear(),
-  //       availabilityOne: availability[0].timeClicked.start,
-  //       availabilityTwo: availability[1].timeClicked.start,
-  //       availabilityThree: availability[2].timeClicked.start,
-  //       testPrep: testPrep,
-  //       groupSize: groupSize,
-  //       targetScore: targetScore,
-  //       targetSection: targetSection
-  //     }
-  //   })
-  //     .then(function (response) {
-  //       setResponseRecieved(true);
-  //       console.log("submitted");
-  //       console.log(response)
-  //     })
-  //     .catch(function (error) {
-  //       setSubmitError(true);
-  //       console.log(error)
-  //     })
-  // }
-
-  const sendToDB=()=>{
-    axios.post(process.env.REACT_APP_BACKEND_URL,{
-      ...valueArr
+  // send user name and email address to server to generate automated email
+  const sendToServer = (valueObj) => {
+    axios.post(process.env.REACT_APP_BACKEND_URL, {
+      ...valueObj
     },
-    {
-      headers:{ 
-          'Access-Control-Allow-Origin': '*',
-        }
-    }
+      {
+        headers:
+          { 'Access-Control-Allow-Origin': '*' }
+      }
     )
-    .then(data=>console.log(data))
-    .catch(e=>console.error(e))
+      .then(response => {
+        console.log("email sent")
+        console.log('Status',response.status);
+        console.log('Data',response.data);
+        setEmailResponseRecieved(true);
+      })
+      .catch(error => {
+        console.log(error);
+        setEmailResponseRecieved(true);
+        setSubmitError(true);
+      });
   }
 
   const handleSubmit = () => {
-    handleClose()
-    sendToDB()
+    console.log(valueObj)
+    sendToServer(valueObj);
   }
 
   return (
@@ -103,9 +82,9 @@ function DialogModal(props) {
         item.questionType === 'dropdown' ?
           <Dropdown
             questionObj={item}
-            valueArr={valueArr}
+            valueObj={valueObj}
             index={index}
-            setValueArr={setValueArr}
+            setValueObj={setValueObj}
             show={props.show}
             setShow={props.setShow}
             questionArrLength={questionArr.length}
@@ -115,8 +94,8 @@ function DialogModal(props) {
           item.questionType === 'emailInput' ?
             <EmailInput
               questionObj={item}
-              valueArr={valueArr}
-              setValueArr={setValueArr}
+              valueObj={valueObj}
+              setValueObj={setValueObj}
               show={props.show}
               setShow={props.setShow}
               index={index}
@@ -127,8 +106,8 @@ function DialogModal(props) {
             item.questionType === 'dateSelect' ?
               <DateInput
                 questionObj={item}
-                valueArr={valueArr}
-                setValueArr={setValueArr}
+                valueObj={valueObj}
+                setValueObj={setValueObj}
                 show={props.show}
                 setShow={props.setShow}
                 index={index}
@@ -136,11 +115,11 @@ function DialogModal(props) {
                 handleSubmit={handleSubmit}
                 handleClose={handleClose} />
               :
-              item.questionType === 'shortAnswer' ?
+              item.questionType === 'multipleShortAnswer' ?
                 <ShortAnswerInput
                   questionObj={item}
-                  valueArr={valueArr}
-                  setValueArr={setValueArr}
+                  valueObj={valueObj}
+                  setValueObj={setValueObj}
                   show={props.show}
                   setShow={props.setShow}
                   index={index}
@@ -151,8 +130,8 @@ function DialogModal(props) {
                 item.questionType === 'calendar' ?
                   <CalendarInput
                     questionObj={item}
-                    valueArr={valueArr}
-                    setValueArr={setValueArr}
+                    valueObj={valueObj}
+                    setValueObj={setValueObj}
                     show={props.show}
                     setShow={props.setShow}
                     index={index}
@@ -170,9 +149,9 @@ function DialogModal(props) {
         aria-labelledby="form-dialog-title"
         fullWidth={true}
         maxWidth={'sm'}
-        // transitionDuration={400}
+      // transitionDuration={400}
       >
-        {!responseRecieved ?
+        {!responseRecieved || !emailResponseReceived ?
           <DialogContentText
             style={{
               textAlign: 'center',

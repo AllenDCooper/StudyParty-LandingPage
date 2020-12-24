@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from './Button';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, FormHelperText } from '@material-ui/core'
-import CalendarSelect from './CalendarSelect';
+import CalendarPageContainer from './CalendarPageContainer';
 
 const styles = (theme) => ({
   button: {
@@ -27,21 +27,21 @@ function CalendarInput(props) {
 
   const handleChange = (value) => {
     setValue(value)
-    console.log(value)
   }
 
-  const updateValueArr = () => {
-    const obj = {...props.valueArr};
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
     obj[questionName] = value
-    props.setValueArr(obj);
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     console.log(value)
+    // user must choose at least 3 time slots, else they receive an error message
     if (value.length > 2) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else {
       console.log(`error run`)
@@ -73,7 +73,7 @@ function CalendarInput(props) {
           <DialogContentText>
             {questionText}
           </DialogContentText>
-          <CalendarSelect
+          <CalendarPageContainer
             style={{ width: '100%', color: 'black', margin: '0 auto' }}
             id={questionName}
             name={questionName}
@@ -83,17 +83,6 @@ function CalendarInput(props) {
             onChange={handleChange}
             error={errorMessage}
           />
-          {/* <TextField
-            style={{ width: '100%', color: 'black', margin: '0 auto' }}
-            type="text"
-            id="email"
-            name="email"
-            label="email address"
-            variant="outlined"
-            value={value}
-            onChange={handleChange}
-            error={errorMessage}
-          /> */}
           {error ?
             <FormHelperText id="helper-text" style={{ marginTop: '20px', color: 'red' }} >{errorMessage}</FormHelperText>
             : null}
@@ -103,7 +92,7 @@ function CalendarInput(props) {
             Back
           </Button>
           {props.index === (props.questionArrLength - 1) ?
-            <Button onClick={() => { updateValueArr(); props.handleSubmit() }}>
+            <Button onClick={() => { updateValueObj(); props.handleSubmit() }}>
               Submit
           </Button>
             :

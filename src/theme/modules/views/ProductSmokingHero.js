@@ -45,7 +45,7 @@ function ProductSmokingHero(props) {
         </Typography>
       </Button>
       <Typography variant="subtitle1" className={classes.link}>
-        Find a study partner or group today and start improving your score.
+        Connect with a GMAT study partner or group today.
       </Typography>
     </Container>
   );

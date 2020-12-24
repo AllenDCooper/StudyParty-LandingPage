@@ -68,7 +68,7 @@ function ProductHeroLayout(props) {
           height="80"
         /> */}
         {children}
-        <div className={classes.backdrop} />
+        <div className={window.innerWidth <= 740 ? null : classes.backdrop } />
         <div className={clsx(classes.background, backgroundClassName)} />
         <img
           className={classes.arrowDown}

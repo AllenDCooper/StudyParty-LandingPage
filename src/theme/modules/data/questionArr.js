@@ -12,15 +12,9 @@ const questionArr = [
     questionType: 'dateSelect'
   },
   {
-    questionName: 'availability',
-    questionText: 'When are you available for your first study session? Please select three time slots.',
-    questionErrorMessage: 'Please select three time slots',
-    questionType: 'calendar'
-  },
-  {
     questionName: 'studyGroup',
     questionText: 'Are you looking for a study partner or group?',
-    answerOptionsArr: ['Partner', 'Group'],
+    answerOptionsArr: ['Partner', 'Group', 'Not sure'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
   },
@@ -34,7 +28,7 @@ const questionArr = [
   {
     questionName: 'targetScore',
     questionText: 'What is your target score?',
-    answerOptionsArr: ['At least 60th percentile (~550 and up)', 'At least 70th percentile (~600 and up)', 'At least 80th percentile (~650 and up)', 'At least 90th percentile (~700 and up)'],
+    answerOptionsArr: ['At least 60th percentile (~550 and up)', 'At least 70th percentile (~600 and up)', 'At least 80th percentile (~650 and up)', 'At least 90th percentile (~700 and up)', 'Not sure'],
     questionErrorMessage: 'Please select an option',
     questionType: 'dropdown'
   },
@@ -46,16 +40,16 @@ const questionArr = [
     questionType: 'dropdown'
   },
   {
-    questionName: 'name',
-    questionText: 'Please provide your name:',
-    questionErrorMessage: 'Please enter your name',
-    questionType: 'shortAnswer'
+    questionName: 'availability',
+    questionText: 'When are you available for your first study session? Please select at least three time slots. The more availability you indicate, the faster you’ll be matched with a study partner',
+    questionErrorMessage: 'Please select at least three time slots',
+    questionType: 'calendar'
   },
   {
-    questionName: 'email',
-    questionText: 'Please provide your email address:',
-    questionErrorMessage: 'Please enter a valid email address',
-    questionType: 'emailInput'
+    questionName: ['name', 'email'],
+    questionText: ['Please provide your name and email address'],
+    questionErrorMessage: ['Please enter your name', 'Please enter a valid email address'],
+    questionType: 'multipleShortAnswer'
   },
 ]
 

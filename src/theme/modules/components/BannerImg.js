@@ -13,7 +13,7 @@ const BannerImg = () => {
     minHeight: "0",
     zIndex: -5,
     marginTop: '210px',
-    backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot.jpg`
+    backgroundImage: `${process.env.PUBLIC_URL}/assets/video_screenshot3.jpg`
   };
 
   const imageStyle = {

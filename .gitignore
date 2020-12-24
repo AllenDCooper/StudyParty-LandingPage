@@ -18,6 +18,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/emailManualSend
+email_send_data1.js
+email_send_data2.js
+email_send.js
 
 npm-debug.log*
 yarn-debug.log*

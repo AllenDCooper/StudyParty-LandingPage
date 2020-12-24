@@ -32,17 +32,17 @@ function DateInput(props) {
     return curDateCopy
   };
 
-  const updateValueArr = () => {
-    const obj = {...props.valueArr};
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
     obj[questionName] = value
-    props.setValueArr(obj);
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     if (value) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else {
       setError(true);

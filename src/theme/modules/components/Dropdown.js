@@ -11,7 +11,6 @@ const styles = (theme) => ({
 });
 
 function Dropdown(props) {
-  // console.log(props);
   const { classes } = props;
 
   // destructure question object from props
@@ -28,17 +27,17 @@ function Dropdown(props) {
     setValue(event.target.value)
   };
 
-  const updateValueArr = () => {
-    const obj = {...props.valueArr};
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
     obj[questionName] = value
-    props.setValueArr(obj);
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     if (value) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1);
     } else {
       setError(true);

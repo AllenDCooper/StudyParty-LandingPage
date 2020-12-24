@@ -11,7 +11,6 @@ const styles = (theme) => ({
 });
 
 function EmailInput(props) {
-  // console.log(props)
   const { classes } = props;
 
   // destructure question object from props
@@ -36,17 +35,17 @@ function EmailInput(props) {
     return (false)
   }
 
-  const updateValueArr = () => {
-    const obj = {...props.valueArr};
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
     obj[questionName] = value
-    props.setValueArr(obj);
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     if (validateEmail(value)) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else {
       setError(true);
@@ -96,7 +95,7 @@ function EmailInput(props) {
             Back
           </Button>
           {props.index === (props.questionArrLength - 1) ?
-            <Button onClick={() => { updateValueArr(); props.handleSubmit() }}>
+            <Button onClick={() => { updateValueObj(); props.handleSubmit() }}>
               Submit
           </Button>
             :
