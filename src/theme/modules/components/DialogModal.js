@@ -49,7 +49,7 @@ function DialogModal(props) {
 
   // send user name and email address to server to generate automated email
   const sendToServer = (valueObj) => {
-    axios.post(process.env.REACT_APP_BACKEND_URL, {
+    axios.post('https://studyparty-server.herokuapp.com/api/signup', {
       ...valueObj
     },
       {
