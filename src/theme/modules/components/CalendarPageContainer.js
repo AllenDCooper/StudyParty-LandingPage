@@ -1,6 +1,5 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react'
-import { DateTime } from "luxon";
 import calendarEvents from '../data/calendarEvents';
 import CalendarPage from './CalendarPage';
 import './CalendarPageContainer.css'

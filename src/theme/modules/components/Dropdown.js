@@ -27,18 +27,17 @@ function Dropdown(props) {
     setValue(event.target.value)
   };
 
-  const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    console.log(arr);
-    props.setValueArr(arr);
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
+    obj[questionName] = value
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     if (value) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1);
     } else {
       setError(true);

@@ -12,7 +12,7 @@ const styles = (theme) => ({
 });
 
 function CalendarInput(props) {
-  console.log(props)
+  // console.log(props)
   const { classes } = props;
 
   // destructure question object from props
@@ -29,10 +29,10 @@ function CalendarInput(props) {
     setValue(value)
   }
 
-  const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    props.setValueArr(arr);
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
+    obj[questionName] = value
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
@@ -41,7 +41,7 @@ function CalendarInput(props) {
     if (value.length > 2) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else {
       console.log(`error run`)
@@ -92,7 +92,7 @@ function CalendarInput(props) {
             Back
           </Button>
           {props.index === (props.questionArrLength - 1) ?
-            <Button onClick={() => { updateValueArr(); props.handleSubmit() }}>
+            <Button onClick={() => { updateValueObj(); props.handleSubmit() }}>
               Submit
           </Button>
             :

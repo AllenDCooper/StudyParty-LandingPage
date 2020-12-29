@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from './Button';
@@ -11,7 +11,7 @@ const styles = (theme) => ({
 });
 
 function ShortAnswerInput(props) {
-  console.log(props)
+  // console.log(props)
   const { classes } = props;
 
   // destructure question object from props
@@ -26,6 +26,13 @@ function ShortAnswerInput(props) {
   const [emailValue, setEmailValue] = useState(null);
   const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(()=>{
+    const obj = {...props.valueObj}
+    obj.name = nameValue
+    obj.email = emailValue
+    props.setValueObj(obj);
+  },[nameValue,emailValue])
 
   const handleChange = (event) => {
     console.log(event.target.name)
@@ -44,18 +51,19 @@ function ShortAnswerInput(props) {
     return (false)
   }
 
-  const updateValueArr = () => {
-    const arr = props.valueArr;
-    const nameAndEmail = { name: nameValue, email: emailValue }
-    arr[props.index] = nameAndEmail;
-    props.setValueArr(arr);
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
+    obj.name = nameValue;
+    obj.email = emailValue;
+    props.setValueObj(obj);
   }
 
   const checkSubmit = () => {
     if (nameValue && validateEmail(emailValue)) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      props.setShow(props.show + 1)
+      updateValueObj();
       props.handleSubmit();
     } else if (!nameValue && validateEmail(emailValue)) {
       setError(true);
@@ -73,7 +81,7 @@ function ShortAnswerInput(props) {
     if (nameValue && validateEmail(emailValue)) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else if (!nameValue && validateEmail(emailValue)) {
       setError(true);

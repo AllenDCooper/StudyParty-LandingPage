@@ -25,7 +25,7 @@ function EmailInput(props) {
 
   const handleChange = (event) => {
     setValue(event.target.value)
-    console.log(value)
+    // console.log(value)
   }
 
   const validateEmail = (emailTest) => {
@@ -35,17 +35,17 @@ function EmailInput(props) {
     return (false)
   }
 
-  const updateValueArr = () => {
-    const arr = props.valueArr;
-    arr[props.index] = value;
-    props.setValueArr(arr);
+  const updateValueObj = () => {
+    const obj = {...props.valueObj};
+    obj[questionName] = value
+    props.setValueObj(obj);
   }
 
   const handleNext = () => {
     if (validateEmail(value)) {
       setError(false);
       setErrorMessage("");
-      updateValueArr();
+      updateValueObj();
       props.setShow(props.show + 1)
     } else {
       setError(true);
@@ -95,7 +95,7 @@ function EmailInput(props) {
             Back
           </Button>
           {props.index === (props.questionArrLength - 1) ?
-            <Button onClick={() => { updateValueArr(); props.handleSubmit() }}>
+            <Button onClick={() => { updateValueObj(); props.handleSubmit() }}>
               Submit
           </Button>
             :
